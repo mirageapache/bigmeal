@@ -1,0 +1,59 @@
+/*登入頁*/
+.login_panel {
+	/*background-color: #ddd;*/
+	background: rgba(50, 50, 50, 0.5);
+	position: relative;
+	left: 50%;
+	top: 50%;
+	width: 250px;
+	display: inline-block;
+	border:1px solid gray;
+	border-radius: 5px;
+	padding: 20px;
+	margin: 8% 0;
+	margin-left: -150px;
+	box-shadow: 5px 5px 3px #555;
+	/*margin-top:300px;*/
+}
+
+div.login_panel>input{
+	margin:10px 0;
+
+}
+
+button.login_btn {
+	width: 100%;
+	font-size: 18px;
+}
+
+
+/*註冊頁*/
+
+
+div.regist_panel {
+	background: rgba(50, 50, 50, 0.5);
+	opacity:1;
+	border:1px solid gray;
+	border-radius: 5px;
+	padding: 20px;
+	margin-top: 50px;
+	box-shadow: 5px 5px 3px #555;
+}
+
+table.fill_in_table {
+	color:white;
+	width: 100%;
+	max-width: 450px;
+}
+
+table.fill_in_table>tbody>tr>td{
+	padding: 10px;
+}
+
+
+div.regist_panel>input{
+	margin:10px 0;
+
+}
+
+

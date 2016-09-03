@@ -1,0 +1,234 @@
+/* NavBar */
+.navbar{
+	background: rgba(50, 50, 50, 0.5);
+	/*background-image: 
+		url(/data/image/nav_bg.jpg);*/
+	width:100%;
+	height:60px;
+	margin:0px;
+	border:0px;
+	padding:15px;
+	z-index: 1000;
+	font-weight: bold;
+	border-radius:0px;
+	color: white;
+}
+
+.navbar .navbar-brand{
+	color:black;
+	margin-left:30px;
+	border:1px solid transparent;
+	padding:5px;
+	font-size: 24px;
+	color: white;
+}
+
+.navbar .menu{
+	position: absolute;
+	margin-left: 120px;
+	padding:10px;
+	font-size: 18px;
+}
+
+.navbar .menu>a{
+	font-size: 20px;
+	color:white;
+	cursor:pointer;
+}
+
+.navbar .search{
+/*	position:absolute;
+	right:70px;*/
+	margin-top: 3px;
+}
+span.search>form>input{
+	border-radius: 3px;
+	border: 0.5px solid #ddd;
+	color:black;
+	padding: 3px 5px;
+}
+.navbar .search .submit{
+	position: relative;
+	background:transparent;
+	width:22px;
+	border:0px;
+	right: 27px;
+	padding:0px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.navbar .search >form>i{
+	position: relative;
+	right:50px;
+	color:#bbb;
+}
+
+.navbar-xs{
+	background-color:#f90;
+	height:36px;
+	padding:6px;
+	text-align: center;
+	z-index: 100px;
+}
+
+.navbar-xs >button{
+	background-color:transparent;
+	float: left;
+	border:0;
+	font-size:15px;
+}
+
+.navbar-xs .brand{
+	color:black;
+	font-weight: 700;
+	font-size: 18px;
+	margin-left:-30px;
+}
+/* NavBar end */
+
+
+/* 左側單選 */
+#left_menu{
+	position: fixed;
+	display: none;
+	background-color:#444;
+	color:white;
+	width:0;
+	height:100%;
+	top:0;
+	left: 0;
+	z-index: 1000;
+}
+#left_menu>div{
+	margin:50px;
+}
+
+#left_menu>div>h3,
+#left_menu>div>h3>a{
+	color:white;
+	cursor:pointer;
+}
+#left_menu>div>h3:hover{
+	text-decoration: underline;
+}
+
+#black_panel{
+	position: fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	z-index:999;
+	background-color:rgba(0,0,0,0);
+	display: none;
+}
+
+/* 左側單選 End */
+
+/* 首面彈出視窗 */
+.modal >div{
+	margin-top: 160px;
+	width:325px;	
+}
+
+.modal .modal-body{
+	padding: 25px;
+}
+
+.modal .form_page{
+	display: none
+}
+
+.modal >div>div>div>button{
+	display: block;
+	margin: 10px;
+	width:250px;
+	color:white
+}
+
+.signin .fb_signin,
+.login .fb_login{
+	background-color:#3a5795;
+}
+.signin .gl_signin,
+.login .gl_login{
+	background-color:#d73d32;
+}
+
+.signin .e_signin,
+.login .e_login{
+	background-color:white;
+	border:1px solid #ddd;
+	color:black;
+}
+
+.modal >div>div>div>input{
+	margin:8px 0;
+}
+
+.signin .modal-body>h4{
+	margin:30px 10px 0;
+	line-height: 24px;
+}
+/* 首面彈出視窗 End */
+
+/* Footer */
+#footer{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	bottom: 0px;
+	clear:both;
+	background-color:#333;
+	padding:10px 15%;
+}
+
+#footer >div>div{
+	text-align: center;
+}
+
+#footer >div>div>h4{
+	color:white;
+	cursor: pointer;
+}
+#footer >div>div>div>div>p:hover{
+	text-decoration: underline;
+}
+
+#footer .follow_us{
+	color:white;
+	text-align: center;
+}
+#footer .follow_us >div{
+	padding:10px 0;
+}
+
+.brand_icon{
+	background-color:transparent;
+	line-height: 1px;
+	width:40px;
+	height:40px;
+	margin:5px;
+	border:1px solid #aaa;
+	border-radius:100%;
+	padding:8px;
+	text-align: center;
+	cursor:pointer;
+	-webkit-transition: background-color 0.5s ease-out;
+  	-moz-transition: background-color 0.5s ease-out;
+  	-o-transition: background-color 0.5s ease-out;
+  	transition: background-color 0.5s ease-out;
+}
+
+#footer .follow_us >div>span.f:hover{
+	background-color: #3a5795;
+}
+#footer .follow_us >div>span.g:hover{
+	background-color: #d73d32;
+}
+#footer .follow_us >div>span.t:hover{
+	background-color: #4099ff;
+}
+
+
+/* #Footer end */

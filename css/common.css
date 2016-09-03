@@ -1,0 +1,32 @@
+::selection{ background-color: #b8b8ff; color: white; }
+::moz-selection{ background-color: #b8b8ff; color: white; }
+::webkit-selection{ background-color: #b8b8ff; color: white; }
+
+body {
+		/*background-color: #bdb;*/
+		background-image: 
+		url(/data/image/nav_bg.jpg);
+		font: 13px/20px normal Helvetica, Arial, sans-serif;
+		color: white; /*#4F5155*/
+	    font-family: Microsoft JhengHei,Arial;
+	    /*border: 1px solid blue;*/
+}
+
+div.container {
+	height: 100%;
+	/*border: 1px solid red;*/
+
+}
+
+a {
+	color: white;
+	/*background-color: transparent;*/
+	font-weight: normal;
+}
+a:hover {
+	color: white;
+	text-decoration: underline;
+}
+a.in_btn:hover {
+	text-decoration: none;
+}
