@@ -14,20 +14,38 @@ class User extends CI_Controller {
 
 	}
 
-	public function regist_page() //註冊頁
+	public function register_page() //註冊頁
 	{
-
-
 		$data['css'] = array('/css/user.css');
-		$this->load->view('/user/regist_page',$data);
+		$this->load->view('/user/register_page',$data);
 	}
 
-	public function regist_action() //註冊
+	public function register_action() //註冊
 	{
+		
+		$Message = array
+		(
+			'account' =>$_POST['account'] ,
+			'password' => $_POST['password'],
+			'name' => $_POST['name'],
+			'phone' => $_POST['phone'],
+			'address' => $_POST['address'],
+			'email' => $_POST['email']
+		);
 
-
+		echo $Message;
 
 	}
+
+	public function account_check() //檢查帳號是否已存在
+	{
+		$account = $_POST['account'];
+
+		$this->load->model("UserModel");
+		$result = $this->UserModel->account_check($account);
+		echo $result;
+	}
+
 
 
 

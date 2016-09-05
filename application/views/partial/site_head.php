@@ -32,13 +32,13 @@
 	<?php endforeach;?>
 
   	<!-- script -->
-	<!-- 
-	<script type="text/javascript" src="<?=base_url("/script/jquery-2.1.3.min.js")?>"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="<?=base_url("/script/bootstrap.min.js")?>"></script>
-	<script type="text/javascript" src="<?=base_url("/script/main.js")?>"></script>
-	<script type="text/javascript" src="<?=base_url("/script/product.js")?>"></script>
-  	-->
+
+	<script type="text/javascript" src="<?=base_url("/package/js/jquery-2.1.3.min.js")?>"></script>
+	<script type="text/javascript" src="<?=base_url("/package/js/bootstrap.min.js")?>"></script>
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+	
+	<script type="text/javascript" src="<?=base_url("/js/user.js")?>"></script>
+
 
 
 </head>

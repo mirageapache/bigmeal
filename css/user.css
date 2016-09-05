@@ -30,13 +30,13 @@ button.login_btn {
 /*註冊頁*/
 
 
-div.regist_panel {
+div.register_panel {
 	background: rgba(50, 50, 50, 0.5);
 	opacity:1;
 	border:1px solid gray;
 	border-radius: 5px;
 	padding: 20px;
-	margin-top: 50px;
+	margin: 50px 0;
 	box-shadow: 5px 5px 3px #555;
 }
 
@@ -50,8 +50,18 @@ table.fill_in_table>tbody>tr>td{
 	padding: 10px;
 }
 
+label.title{
+	font-weight: normal;
+	font-size: 20px;
+}
 
-div.regist_panel>input{
+label.hint{
+	font-size: 14px;
+	color:red;
+	display:none;
+}
+
+div.register_panel>input{
 	margin:10px 0;
 
 }
