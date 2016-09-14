@@ -7,7 +7,7 @@ class Main extends CI_Controller {
 	{
 
 		$data['css'] = array('');
-
+		$data['js'] = array('');
 		$this->load->view('index',$data);
 	}
 }

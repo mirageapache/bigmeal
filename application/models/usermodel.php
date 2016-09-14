@@ -7,47 +7,42 @@ class UserModel extends CI_Model {
 
     //登入
     function login($account,$password){
-        $query = $this->db->query("SELECT * FROM User WHERE account='".$account."';");
-        foreach ($query->result() as $row)
-        {
-           // echo $row->Account;
-           // echo "<br>";
-           // echo $row->Email;
-           // echo "<br>";
-           // echo $row->Password;
-           // echo "<br>";
+        $this->db->select("*");
+        $query = $this->db->get_where("user",Array("account" => $account, "password" => $password ));
+
+        if ($query->num_rows() > 0){ //如果數量大於0
+            return $query->row();  //回傳第一筆
+        }else{
+            return null;
         }
-        // if($account_exist > 0){
-        //     return true;
-        // }
-        // else{
-        //     return false;
-        // }
     }
 
     //檢查帳號是否重復
     function account_check($account){
-        $query = $this->db->query("SELECT * FROM user WHERE account='".$account."'");       
-
+        $query = $this->db->query("SELECT * FROM user WHERE account='".$account."'");
         if($query->num_rows() > 0){
-            echo 'exist';
+            return 'exist';
           }
           else{
-            echo $account;
+            return $account;
           }
 
     }
 
     //註冊
-    function register($user_id,$account,$email,$password,$create_date){
+    function register($user_id,$account,$password,$email,$create_date){
     	$this->db->insert("user",Array(
-                "user_id" => $user_id,
+                "ID" => $user_id,
           			"account" => $account,
+                "password" => $password,
           			"email" => $email,
-          			"password" => $password,
-                "create_date" => $create_date
+                "create_day" => $create_date,
+                "state" => 1,
+                "user_type" => 1,
+                "email_confirm" => 0
     		));
 
+      return 'success';
     }
 
 }
