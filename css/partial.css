@@ -44,33 +44,40 @@ span.search>form>input{
 	color:black;
 	padding: 3px 5px;
 }
-.navbar .search .submit{
-	position: relative;
-	background:transparent;
-	width:22px;
-	border:0px;
-	right: 27px;
-	padding:0px;
-	cursor: pointer;
-	z-index: 1;
-}
 
 .navbar .search >form>i{
 	position: relative;
-	right:50px;
+	right:30px;
 	color:#bbb;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.navbar>span>a.basket_link{
+	color: white;
+	margin:1px 10px 0 0; 
+	border:1px solid transparent;
+	padding: 3px;
+}
+
+.navbar>span>a.basket_link:hover{
+	border: 1px solid #aaa;
+	border-radius:3px;
+	box-shadow: 0.5px 0.5px 2px #eee;
+	cursor:pointer;
 }
 
 .navbar label.user_name{
 	font-size: 14px;
 	margin-right: 10px;
-	/*border: 1px solid transparent;*/
-	border:1px solid white;
+	border: 1px solid transparent;
+	/*border:1px solid white;*/
 	border-radius: 3px;
 	padding: 3px 5px;
 }
 .navbar label.user_name:hover{
-	box-shadow: 0.5px 0.5px 2px #eee;
+	border: 1px solid #aaa;
+	box-shadow: 0.5px 0.5px 0.5px #eee;
 	cursor:pointer;
 }
 

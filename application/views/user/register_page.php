@@ -1,4 +1,4 @@
-<?php include("/../partial/site_head.php"); ?>
+<?php include(dirname(__file__)."/../partial/site_head.php");?>
 
 <div class="container">
 	<div class="register_panel">
@@ -29,31 +29,6 @@
 				</td>
 			</tr>
 		</table>
-		<!-- <hr>
-			<table class="fill_in_table">
-				<tr>
-					<td>
-						<label class="title">姓名</label><label class="hint name_hint pull-right"></label>
-						<input class="name form-control" type="text" placeholder="輸入姓名" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label class="title">電話</label><label class="hint phone_hint pull-right"></label>
-						<input class="phone form-control" type="password" placeholder="09XXXXXXXX" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label class="title">地址</label><label class="hint address_hint pull-right"></label>
-						<input class="address form-control" type="password" placeholder="XX市XX路XX號" />
-					</td>
-				</tr>
-				<tr>
-					
-				</tr>	
-
-			</table> -->
 		<hr>
 		<br/>
 		<button class="register_btn btn btn-primary" >註冊</button>
@@ -61,4 +36,4 @@
 	</div>
 </div>
 
-<?php include("/../partial/site_footer.php");  ?>
+<?php include(dirname(__file__)."/../partial/site_footer.php");?>

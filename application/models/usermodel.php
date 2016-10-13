@@ -18,24 +18,29 @@ class UserModel extends CI_Model {
     }
 
     //檢查帳號是否重復
-    function account_check($account){
-        $query = $this->db->query("SELECT * FROM user WHERE account='".$account."'");
-        if($query->num_rows() > 0){
-            return 'exist';
-          }
-          else{
-            return $account;
-          }
+    function get_user($atr,$table,$condition){
+        $this->db->select($atr);
+        $this->db->from($table);
+        $this->db->where($condition);
+        $query = $this->db->get();
 
+        if ($query->num_rows() >0){
+            $result = $query->result_array();
+            return $result;
+        }
+        else{
+            return null;
+        }
+        
     }
 
     //註冊
     function register($user_id,$account,$password,$email,$create_date){
     	$this->db->insert("user",Array(
                 "ID" => $user_id,
-          			"account" => $account,
+          		"account" => $account,
                 "password" => $password,
-          			"email" => $email,
+          		"email" => $email,
                 "create_day" => $create_date,
                 "state" => 1,
                 "user_type" => 1,
@@ -43,6 +48,36 @@ class UserModel extends CI_Model {
     		));
 
       return 'success';
+    }
+
+    function edit_user_info($name,$telephone,$cellphone,$address,$email,$user_id){
+        $this->db->select("*");
+        $query = $this->db->get_where("user_info",Array("user_id" => $user_id));
+
+        if($query->num_rows == 0){ //使用者還沒新增資料
+            $this->db->insert("user_info",Array(
+                "name" => $name,
+                "telephone" => $telephone,
+                "cellphone" => $cellphone,
+                "address" => $address,
+                "email" => $email,
+                "user_id" => $user_id
+            ));
+
+            return 'success';
+        }
+        else{ //修改資料
+            $this->db->where('user_id',$user_id);
+            $this->db->update("user_info",Array(
+                "name" => $name,
+                "telephone" => $telephone,
+                "cellphone" => $cellphone,
+                "address" => $address,
+                "email" => $email
+            ));
+
+            return 'success';
+        }
     }
 
 }

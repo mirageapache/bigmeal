@@ -1,0 +1,145 @@
+/* product_list_item */
+.product_list{
+	display: table;
+	width: 100%;
+	max-width: 1024px;
+	/*border: 1px solid red;*/
+	margin:0 auto;
+	padding: 10px 0;
+}
+
+.product_list_item{
+	background-color: white;
+	position: relative;
+	float: left;
+	border-radius: 5px;
+}
+
+.product_list_item>div.product_img{
+	position: absolute;
+	/* background-position: center; */
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	cursor: pointer;
+	border: 1px solid #666;
+	border-radius: 5px;
+}
+
+.product_list_item>div.product_info{
+	position: relative;
+	color: #444;
+	text-align: left;
+	margin:100% 10px 0;
+}
+
+.product_list_item>div.product_info>p{
+	height:43px;
+	font-size: 15px;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+.product_list_item>div.product_info>label{
+	color:green;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 1024px){
+	.product_list_item{
+		width: 19%;
+		margin: 5px 0.5%;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+	.product_list_item{
+		width: 23%;
+		margin: 5px 1%;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 767px){
+	.product_list_item{
+		width: 48%;
+		margin:1%;
+	}
+}
+
+
+/* product_item_page */
+
+@media screen and (min-width: 767px){
+	div.product_detail{
+		background-color: rgba(50,50,50,0.5);
+		margin: 20px 5%;
+		border-radius: 5px;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 766px){
+	div.product_detail{
+		background-color: white;
+		margin: 0px;
+		width: 100%;
+		color: black;
+	}
+}
+
+div.product_detail>div.product_img{
+	text-align: center;
+	padding: 30px;
+}
+
+div.product_detail>div>img{
+	width: 90%;
+	border:1px solid #666;
+}
+
+
+div.product_detail>div.product_info{
+	padding: 30px;
+}
+
+div.product_detail>div.product_info>h2{
+	margin:20px 0;
+}
+
+div.product_detail>div.product_info>label.price{
+	font-size: 28px;
+	color: #00dd03;
+}
+
+div.product_detail>div.product_info>span{
+	margin-top: 10px;
+
+}
+
+div.product_detail>div.product_info>span>.amount_title{
+	font-size: 18px;
+	font-weight: normal;
+	float: left;
+	margin:5px;
+}
+
+div.product_detail>div.product_info>span>select{
+	width: 50%;
+	max-width: 250px;
+	float: left;
+}
+
+div.product_detail>div.product_info>span>label.unit_title{
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+div.product_detail>div.product_info>button{
+	width: 50%;
+	max-width: 250px;
+	font-size: 16px;
+	margin-top: 30px;
+	padding: 10px;
+}

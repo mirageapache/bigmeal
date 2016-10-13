@@ -2,16 +2,6 @@
 
 class FormClass { // 表單驗證
     
-    function essential($input) // 必填欄位
-    {
-		if( strlen($input) == 0){
-            return true; //field是空值
-        }
-        else{
-            return false;
-        }
-    }
-
     function input_length($input,$min,$max) // 字數限制
     {
         if( $min > $max){
@@ -39,5 +29,30 @@ class FormClass { // 表單驗證
             return false;
         }
     }
+
+    function telephone_check($input){
+        if(preg_match('/^[0][1-9]{1,3}[-][0-9]{6,8}$/',$input) == true){
+            return true; // 電話格式正確
+        }
+        else {
+            return false;
+        }
+    }
+
+    function cellphone_check($input){
+        if(preg_match('/09[0-9]{8}/',$input) == true){
+            return true; // 手機格式正確
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    
+
+
+
+    
 
 }

@@ -2,7 +2,7 @@
 
 class User extends CI_Controller {
 
-	public function login_page() {//登入頁
+	public function login_page($n) {//登入頁
 		session_start();
 		if(isset($_SESSION["user"]) && $_SESSION["user"] != null){
 			redirect(site_url("/")); //轉回首頁
@@ -11,7 +11,10 @@ class User extends CI_Controller {
 		$data['css'] = array('css/user.css');
 		$data['js'] = array('js/user.js');
 		$data['pageTitle'] = '會員登入';
-		$this->load->view('/user/login_page',$data);
+		if (isset($n)) {
+			$data['n'] = $n;
+		}
+		$this->load->view('/user/login_page/_',$data);
 	}
 
 	public function login_action() {//登入
@@ -26,13 +29,14 @@ class User extends CI_Controller {
 
 		$account = trim($this->input->post("account")); //trim()可清除字串前後的空白
 		$password = trim($this->input->post("password"));
+		$n = $this->input->post("n");
 		if(strlen($account) == 0){
 			$data['errorMessage'] = '請輸入帳號';
-			$this->load->view("/user/login_page",$data);		
+			$this->load->view("/user/login_page/_",$data);		
 		}
 		else if (strlen($password) == 0) {
 			$data['errorMessage'] = '請輸入密碼';
-			$this->load->view("/user/login_page",$data);		
+			$this->load->view("/user/login_page/_",$data);		
 		}
 		else{
 			$this->load->model("UserModel");
@@ -40,18 +44,23 @@ class User extends CI_Controller {
 
 			if(is_null($user)){
 				$data['errorMessage'] = '帳號或密碼錯誤';
-				$this->load->view("/user/login_page",$data);		
+				$this->load->view("/user/login_page/_",$data);		
 				return true;
 			}
 			$_SESSION["user"] = $user;
-			redirect(site_url("/"));
+			if ($n == '1') {
+				redirect(site_url("/main/basket"));
+			}
+			else{
+				redirect(site_url("/"));
+			}
 		}
 	}
 
 	public function logout() { //登出
 		session_start();
 		session_destroy();
-		redirect(site_url("/user/login_page")); //轉回登入頁
+		redirect(site_url("/user/login_page/_")); //轉回登入頁
 	}
 
 	public function register_page() { //註冊頁
@@ -67,18 +76,17 @@ class User extends CI_Controller {
 		$password_confirm = $_POST['password_confirm'];
 		$email = $_POST['email'];
 		
-
 		$this->load->library('formclass');
 
-		if($this->formclass->essential($account)){
+		if(empty($account)){
 			echo 'account_null';
 			return false;
 		}
-		else if($this->formclass->essential($password)){
+		else if(empty($password)){
 			echo 'password_null';
 			return false;
 		}
-		else if($this->formclass->essential($password_confirm)) {
+		else if(empty($password_confirm)) {
 			echo 'password_confirm_null';
 			return false;
 		}
@@ -86,7 +94,7 @@ class User extends CI_Controller {
 			echo 'password_confirm_wrong';
 			return false;
 		}
-		else if($this->formclass->essential($email)) {
+		else if(empty($email)) {
 			echo 'email_null';
 			return false;
 		}
@@ -116,8 +124,8 @@ class User extends CI_Controller {
 
 		
 
-		$this->load->library('userclass');
-        $id = $this->userclass->generate_id(); //呼叫產生User Id
+		$this->load->library('GenerateClass');
+        $id = $this->GenerateClass->user_id(); //呼叫產生User Id
 		$create_date = date('y/m/d'); //註冊日期
 
 		$result = $this->UserModel->register($id,$account,$password,$email,$create_date);
@@ -135,41 +143,151 @@ class User extends CI_Controller {
 	
 		$account = $_POST['account'];
 		$this->load->model('UserModel');
-		$result = $this->UserModel->account_check($account);
+		$result = $this->UserModel->get_user('account','user',array('account'=> $account));
+		if(is_null($result)){ 
+            return $account;
+        }
+        else{
+            return 'exist';
+        }
+
+		echo $result;
 	}
 
-	public function user_page($num) { //User Info
+	public function user_page($num) { //User Info Page
+		session_start();
+		if(isset($_SESSION["user"]) == false && $_SESSION["user"] == null){
+			redirect(site_url("/user/login_page/_"));
+			return true;
+		}
+
 		$data['css'] = array('/css/user.css');
-		$data['js'] = array('/js/user.js');
+		$data['js'] = array('/js/user_partial.js');
 		$data['num'] = $num;
 		$this->load->view('/user/user_page',$data);
-
 	}
 
-	public function user_partial() {
-
+	public function user_partial() { //change User Partial View
 		$num = $_POST['num'];
+
 		switch ($num) {
-			case '1':
+			case '1': //會員資料
 				$this->load->view('/user/user_partial/user_info');
 				break;
-			case '2':
+			case '1-1': //新增or編輯會員資料
+				$this->load->view('/user/user_partial/edit_user_info');
+				break;
+			case '2': //訂單查詢
 				$this->load->view('/user/user_partial/order_list');
 				break;
-			case '3':
+			case '3': //購物記錄
 				$this->load->view('/user/user_partial/purchased');
 				break;
-			case '4':
-				$this->load->view('/user/user_partial/collection');
+			case '4': //收藏
+				$this->load->view('/user/user_partial/collection');	
+				break;
+			case '5': //通知
+				$this->load->view('/user/user_partial/message');	
 				break;
 			default:
 				$this->load->view('/user/user_partial/user_info');
 				break;
 		}
 		return false;
+	}
+
+	public function get_user_data() { //抓會員資料
+		session_start();
+		if(isset($_SESSION["user"]) == false && $_SESSION["user"] == null){
+			redirect(site_url("/user/login_page/_"));
+			return true;
+		}
+		
+		$this->load->model('UserModel');
+		$result = $this->UserModel->get_user('*','user_info',array('user_id'=> $_SESSION["user"]->ID));
+		if(is_null($result)){
+			echo 'user_null'; //查無資料
+		}
+		else{
+			echo json_encode($result);
+		}
 
 	}
 
+	public function edit_user_info(){ //新增或修改會員資料
+		session_start();
+		$name = $_POST['name'];
+		$telephone = $_POST['telephone'];
+		$cellphone = $_POST['cellphone'];
+		$address = $_POST['address'];
+		$email = $_POST['email'];
+		$user_id =$_SESSION['user']->ID;
+
+		$this->load->library('formclass');
+		if(empty($name)){
+			echo 'name_null';
+			return false;
+		}
+		elseif (empty($telephone)) {
+			echo 'telephone_null';
+			return false;
+		}
+		elseif (empty($cellphone)) {
+			echo 'cellphone_null';
+			return false;
+		}
+		elseif (empty($address)) {
+			echo 'address_null';
+			return false;
+		}
+		elseif (empty($email)) {
+			echo 'email_null';
+			return false;
+		}
+		elseif (!$this->formclass->telephone_check($telephone)) {
+			echo 'telephone_wrong';
+			return false;
+		}
+		elseif (!$this->formclass->cellphone_check($cellphone)) {
+			echo 'cellphone_wrong';
+			return false;
+		}
+		elseif (!$this->formclass->email_check($email)) {
+			echo 'email_wrong';
+			return false;
+		}
+		elseif ($this->formclass->input_length($name,0,6) == 'over') {
+			echo 'name_over';
+			return false;
+		}
+		elseif ($this->formclass->input_length($telephone,0,10) == 'over') {
+			echo 'telephone_over';
+			return false;
+		}
+		elseif ($this->formclass->input_length($cellphone,0,10) == 'over') {
+			echo 'cellphone_over';
+			return false;
+		}
+		elseif ($this->formclass->input_length($address,0,100) == 'over') {
+			echo 'address_over';
+			return false;
+		}
+		elseif ($this->formclass->input_length($email,0,50) == 'over') {
+			echo 'email_over';
+			return false;
+		}
+		else{
+			$this->load->model('UserModel');
+			$result = $this->UserModel->edit_user_info($name,$telephone,$cellphone,$address,$email,$user_id);
+			if($result == 'success'){
+				echo 'success';
+			}
+			else{
+				echo 'error';
+			}
+		}
+
+	}
 
 }
 

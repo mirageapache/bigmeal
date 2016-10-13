@@ -1,4 +1,4 @@
-<?php include("/../partial/site_head.php"); ?>
+<?php include(dirname(__file__)."/../partial/site_head.php");?>
 
 <div class="container">
 	<div class="message_panel">

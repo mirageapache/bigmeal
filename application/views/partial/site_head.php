@@ -26,20 +26,22 @@
 	<link rel="stylesheet" href="<?=base_url("/css/common.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/css/partial.css")?>">
 
-	<?php foreach ($css as $css): ?>
+	<?php if (isset($css)){foreach ($css as $css): ?>
 	   <link rel="stylesheet" href="<?=base_url().$css;?>" />
-	<?php endforeach;?>
+	<?php endforeach; }?>
 
   	<!-- script -->
 
 	<script type="text/javascript" src="<?=base_url("/package/js/jquery-2.1.3.min.js")?>"></script>
 	<script type="text/javascript" src="<?=base_url("/package/js/bootstrap.min.js")?>"></script>
+	<script type="text/javascript" src="<?=base_url("/package/js/jquery.cookie.js")?>"></script>
 	<script type="text/javascript" src="<?=base_url("/js/partial.js")?>"></script>
+	<script type="text/javascript" src="<?=base_url("/js/product.js")?>"></script>
 	
 
-	<?php foreach ($js as $js): ?>
+	<?php if (isset($js)){foreach ($js as $js): ?>
 	   <script type="text/javascript" src="<?=base_url().$js;?>" ></script>
-	<?php endforeach;?>
+	<?php endforeach; }?>
 
 
 </head>
@@ -49,17 +51,18 @@
 	<nav class="navbar hidden-xs" background="<?=base_url("/data/image/nav_bg.jpg")?>">
 	    <a class="navbar-brand" href="<?=site_url("/main/index")?>">青食市集</a>
 		<span class="menu">
-			<a href="<?=site_url("")?>">項目1</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">項目2</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">項目3</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">項目4</a>
+			<a href="<?=site_url("")?>">蔬菜</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("")?>">水果</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("")?>">肉品</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("")?>">五穀雜糧</a>
 		</span>
 
 		<!-- 會員 -->
 		<span class="user_pnael" >
+
 			<?php if (!isset($_SESSION['user'])) { ?>
 				
-				<button class="btn btn-primary pull-right"><a class="in_btn" href="<?=site_url("/user/login_page")?>">登入</a></button>
+				<button class="btn btn-primary pull-right"><a class="in_btn" href="<?=site_url("/user/login_page/_")?>">登入</a></button>
 			<?php } ?>		
 			<?php if (isset($_SESSION['user'])) { ?>
 			
@@ -74,19 +77,18 @@
 				<h4><a href="<?=site_url("/user/user_page/3")?>"><i class=""></i>購物記錄</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/4")?>"><i class=""></i>收藏商品</a></h4>
 				<hr style="margin:5px 0" />
-			    <button class="logout_btn btn btn-success pull-right"><i class="icon-logout"></i><a class="in_btn" href="<?=site_url("/user/logout")?>">登出</a></button>
+			    <button class="logout_btn btn btn-success pull-right" ><i class="icon-logout"></i><a class="in_btn" href="<?=site_url("/user/logout")?>">登出</a></button>
 			</div>
 				
 			<?php } ?>
 
+			<a class="basket_link pull-right" href="<?=site_url("/main/basket")?>" ><i class="icon-th-large"></i></a>
 		</span>
 
 		<span class="search hidden-xs hidden-sm pull-right">
-
 			<form>
 				<input type="text" placeholder="search" />
-				<input class="submit" type="submit" value=" "/>
-				<i class="icon-search"></i>
+				<i class="search_submit icon-search" onclick="search()"></i>
 			</form>
 		</span>
 

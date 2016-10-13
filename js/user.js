@@ -25,7 +25,7 @@ $(document).ready(function(){ //登入頁
 		   		//$('form').attr('action','<?=site_url("/user/login_action")?>');
 				// $('.login_btn').trigger('click');
 			$.ajax({
-	            url: "login_check",
+	            url: "login_action",
 	            data:{ account:account, password:password},
 	            type:"POST",
 	            success: function(result){
@@ -64,7 +64,6 @@ $(document).ready(function(){ //註冊頁
 			    dataType : "text",
 				success : function(Message){
 					if (Message == "exist"){
-						// $(".account").val("");
 						$(".account").focus();
 						$(".account_hint").css("display","block");
 						$(".account_hint").text("帳號已存在!!請使用其他帳號");
@@ -257,46 +256,3 @@ $(document).ready(function(){ //註冊頁
 
 });
 
-$(document).ready(function(){ //會員info
-
-	var index_page = ($('.menu_panel').attr("data-index"));
-	partial_view_ajax(index_page);
-
-	$('.tag').click(function(e){
-		index_page = $(this).attr('data-index');
-		partial_view_ajax(index_page);
-		console.log(e);
-	});
-
-	function partial_view_ajax(index_page){ 
-		$('.tag_action').attr("class","tag");
-		switch(index_page){
-			case '1':
-				$('.user_info_label').parent().attr('class','tag_action');
-				break;
-			case '2':
-				$('.order_list_label').parent().attr('class','tag_action');
-				break;
-			case '3':
-				$('.purchased_label').parent().attr('class','tag_action');
-				break;
-			case '4':
-				$('.collection_label').parent().attr('class','tag_action');
-				break;
-		}
-
-		$.ajax({
-			url: "/index.php/user/user_partial",
-			type: "POST",
-			data: {num: index_page} ,
-			success: function(result){
-				$('.partial_view').text("");
-				$('.partial_view').append(result);
-			},
-			error: function(error){
-
-			}
-		});
-	}
-
-});

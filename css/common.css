@@ -8,12 +8,35 @@ body {
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: white; 
 	    font-family: Microsoft JhengHei,Arial;
+	    font-size: 14px;
 }
 
 div.container {
 	height: 100%;
-	padding: 0px;
+	padding: 20px;
 }
+
+@media screen and (min-width: 1024px) {
+	div.container {
+		/*width: 100%;*/
+		min-width: 1000px;
+	}
+}
+
+@media screen and (min-width: 767px) and (max-width:1023px ){
+	div.container {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 766px) {
+	div.container {
+		width: 100%;
+		margin: 0px;
+		padding: 0;
+	}
+}
+
 
 a {
 	color: white;
@@ -31,4 +54,9 @@ hr {
 	border-color: #888;
 	margin:5px 0;
 }
+
+.no_margin{
+	margin:0px;
+}
+
 

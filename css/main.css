@@ -1,42 +1,104 @@
+/* basket page */
+
+.basket_panel,.post_data_panel{
+	background-color: rgba(50,50,50,0.5);
+	min-height: 50%;
+	border-radius: 5px;
+	padding: 5px 5% 10%;
+}
+
+.basket_panel>table{
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+}
+
+.basket_panel>table>tbody>tr.table_title{
+	border-bottom: 1px solid #ddd;
+}
+
+.basket_panel>table>tbody>tr.table_contain:hover{
+	background-color: #ffffbb;
+	color: #666;
+	cursor: default;
+}
+
+.basket_panel>table>tbody>tr>td.img{
+	width: 100px;
+	padding:5px;
+}
+.basket_panel>table>tbody>tr>td>img{
+	width: 80px;
+}
+.basket_panel>button{
+	font-size: 16px;
+	margin-top:10px;
+	padding: 5px 15px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 766px){
+	.basket_panel{
+		position: absolute;
+		width: 100%;
+		max-height: 500px;
+		min-height: calc(100% - 36px);
+		border-radius: 0px;
+	}
+	.basket_panel>h2{
+		margin-top: 0;
+	}
+	.basket_panel>.xs_panel>div{
+		text-align: center;
+	}
+	.basket_panel>.xs_panel>div>img{
+		width: 60%;
+		max-width: 300px;
+	}
+
+	.basket_panel>.xs_panel>label{
+		position: fixed;
+		font-size: 40px;
+		padding: 30px 3px;
+		top:35%;
+		cursor: pointer;
+		display: none;
+	}
+	.basket_panel>.xs_panel>label.next{
+		right:0px;
+	}
+	.basket_panel>.xs_panel>label.prev{
+		left: 0px;
+	}
+}	
 
 
+/* post_data_page */
+@media screen and (min-width: 0px) and (max-width: 766px){
+	.post_data_panel{
+		position: absolute;
+		width: 100%;
+		border-radius:0px;
+		padding: 5px 5% 5%;
+	}
+}
 
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
+div>.post_data_panel>form{
+	max-width: 450px;
+	margin-top: 20px;
+}
+
+div>.post_data_panel>form>h4>.post_code{
+	max-width:85px;
+	margin-bottom: 5px;
+}
+
+div>.post_data_panel>form>h4>.address{
+	max-width:450px;
+	resize: none;
+}
+
+div>.post_data_panel>form>label{
 	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#body{
-	margin: 0 15px 0 15px;
-}
-
-p.footer{
-	text-align: right;
-	font-size: 11px;
-	border-top: 1px solid #D0D0D0;
-	line-height: 32px;
-	padding: 0 10px 0 10px;
-	margin: 20px 0 0 0;
-}
-
-#container{
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	-webkit-box-shadow: 0 0 8px #D0D0D0;
+	font-size: 16px;
+	margin-left: 20px;
 }
