@@ -14,7 +14,7 @@ class User extends CI_Controller {
 		if (isset($n)) {
 			$data['n'] = $n;
 		}
-		$this->load->view('/user/login_page/_',$data);
+		$this->load->view('/user/login_page',$data);
 	}
 
 	public function login_action() {//登入
@@ -32,11 +32,11 @@ class User extends CI_Controller {
 		$n = $this->input->post("n");
 		if(strlen($account) == 0){
 			$data['errorMessage'] = '請輸入帳號';
-			$this->load->view("/user/login_page/_",$data);		
+			$this->load->view("/user/login_page",$data);		
 		}
 		else if (strlen($password) == 0) {
 			$data['errorMessage'] = '請輸入密碼';
-			$this->load->view("/user/login_page/_",$data);		
+			$this->load->view("/user/login_page",$data);		
 		}
 		else{
 			$this->load->model("UserModel");
@@ -44,7 +44,7 @@ class User extends CI_Controller {
 
 			if(is_null($user)){
 				$data['errorMessage'] = '帳號或密碼錯誤';
-				$this->load->view("/user/login_page/_",$data);		
+				$this->load->view("/user/login_page",$data);		
 				return true;
 			}
 			$_SESSION["user"] = $user;

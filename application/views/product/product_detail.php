@@ -23,15 +23,15 @@
 				</select>
 				<label class="unit_title">/台斤</label>
 			</span>
-				
+			<br>
 			<?php if( $data->stock == 0){ ?>
 				<button class="buy_it btn btn-default" disabled="disabled">庫存不足</button>
 			<?php } else{ ?>
 				<button class="buy_it btn btn-success" onclick="add_basket('<?php echo $data->product_id; ?>','<?php echo $data->name; ?>',<?php echo $data->price; ?>,'<?php echo $data->unit; ?>','<?php echo $data->path.'/'.$data->img_name; ?>'+'.jpg')">加入菜籃</button>
 			<?php } ?>
 			
-			<!-- <button class="btn btn-primary" onclick="get_cookie()">cookie</button>
-			<button class="btn btn-primary" onclick="delete_cookie()">delete</button> -->
+			<button class="btn btn-primary" onclick="get_cookie()">cookie</button>
+			<button class="btn btn-primary" onclick="delete_cookie()">delete</button>
 			
 		</div>
 

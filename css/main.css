@@ -30,7 +30,15 @@
 .basket_panel>table>tbody>tr>td>img{
 	width: 80px;
 }
-.basket_panel>button{
+.basket_panel>table>tbody>tr>td.price,
+.basket_panel>table>tbody>tr>td.amount{
+	width: 15%;
+}
+.basket_panel>table>tbody>tr>td.cancel_item{
+	width: 100px;
+	text-align: center;
+}
+.basket_panel>button.pay{
 	font-size: 16px;
 	margin-top:10px;
 	padding: 5px 15px;

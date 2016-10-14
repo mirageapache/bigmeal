@@ -6,11 +6,12 @@
 		<table class="basket_table hidden-xs">
 			<tr class="table_title">
 				<th></th>
-				<th>品名</th>
-				<th>價格</th>
-				<th>數量</th>
+				<th style="">品名</th>
+				<th style="">價格</th>
+				<th style="">數量</th>
+				<th ></th>
 			</tr>	
-			<tr class="hint_message"><td colspan="4"><h3 style="text-align: center;">購物籃沒東西！<a href="<?=site_url("/main/index")?>">去買東西</a></h3></td></tr>
+			<tr class="hint_message"><td colspan="4"><h3 style="text-align: center;">購物籃沒東西！<a href="<?=site_url("/main/index")?>">去逛逛</a></h3></td></tr>
 
 		</table>
 
@@ -27,30 +28,31 @@
 				<h4>
 					<label class="xs_price"></label>&nbsp&nbsp|&nbsp&nbsp
 					<label class="xs_amount"></label>&nbsp&nbsp|&nbsp&nbsp
-					<label class="xs_sub_total"></label>
+					<label class="xs_sub_total"></label>&nbsp&nbsp|&nbsp&nbsp
+					<button class="xs_cancel_item btn btn-danger" onclick="">取消購買</button>
 				</h4>
 			</div>
 			
 			<label class="next" onclick="slide('+')"><i class="icon-right-open"></i></label>
 			<label class="prev" onclick="slide('-')"><i class="icon-left-open"></i></label>
 		</div>
-		
-
 		<hr style="border-color:#ddd;">
 		
 	</div>
 </div>
 </body>
 </html>
-
-<script type="text/javascript">
-	data_arr = JSON.parse($.cookie('basket'));
+<script>
 	index = 0;
 	if($.cookie('basket') == null){
 		$('.hint_message').css("display","grid");
+		$('.product_item').css("display","none");
+		$('.product_item').css("border","1px solid red");
 	}
 	else{
+		data_arr = JSON.parse($.cookie('basket'));
 		$('.hint_message').css("display","none");
+		$('.product_item').css("display","block");
 		total = 0;
 
 		$.each(data_arr, function(key,value){
@@ -59,6 +61,7 @@
 				'<td class="name">'+value.name+'</td>'+
 				'<td class="price">$NT '+value.price+'</td>'+
 				'<td class="amount">'+value.amount+'/'+value.unit+'</td>'+
+				'<td class="cancel_item"><button class="btn btn-danger btn-sm" onclick="cancel_item()">取消購買</button></td>'+
 			'</tr>');
 			total = total + value.sub_total;
 		});
@@ -68,6 +71,7 @@
 		$('.xs_price').text("$NT"+ data_arr[0].price);
 		$('.xs_amount').text("數量："+ data_arr[0].amount +" "+ data_arr[0].unit);
 		$('.xs_sub_total').text("小計 "+ data_arr[0].sub_total +"元");
+		$('.xs_cancel_item').attr("onclick","cancel_item(0)");
 
 		$('.basket_panel').append('<button class="pay btn btn-success pull-right" onclick="gopay()">總共 NT '+ total +'元 結帳</button>');
 
@@ -76,28 +80,6 @@
 		}
 
 	}
-
-	function gopay(){
-		
-		<?php if(!isset($_SESSION['user'])){ ?>
-			location.href = "<?=site_url("/user/login_page/1")?>";
-		<?php } ?>
-
-		$.ajax({
-			url: "/index.php/product/go_pay",
-			type: "POST",
-			data: {'cookie':$.cookie('basket')} ,
-			success: function(result){
-				if(result){
-					$.cookie('basket', null, { path: '/', expires: -1 });
-					location.replace("<?=site_url("/main/post_data")?>");
-				}
-				console.log(result);
-			}
-		});
-
-	}
-
 	function slide(act){
 		if(act == '+'){
 			if (index < (data_arr.length-1)) {
@@ -114,6 +96,7 @@
 		$('.xs_price').text("$NT"+ data_arr[index].price);
 		$('.xs_amount').text("數量："+ data_arr[index].amount +" "+ data_arr[index].unit);
 		$('.xs_sub_total').text("小計 "+ data_arr[index].sub_total +"元");
+		$('.xs_cancel_item').attr("onclick","cancel_item("+index+")");
 
 		$('.prev').css("display","block");
 		$('.next').css("display","block");
@@ -124,5 +107,23 @@
 			$('.prev').css("display","none"); index = 0;
 		}
 	}
-
+	function gopay(){
+		$.ajax({
+			url: "/index.php/product/go_pay",
+			type: "POST",
+			data: {'cookie':$.cookie('basket')} ,
+			success: function(result){
+				if(result){
+					if(result == 'no_login'){
+						location.href = "<?=site_url('/user/login_page/1')?>";
+					}
+					else{
+						$.cookie('basket', null, { path: '/', expires: -1 });
+						location.replace("<?=site_url('/main/post_data')?>");
+					}
+				}
+				console.log(result);
+			}
+		});
+	}
 </script>

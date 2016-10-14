@@ -13,7 +13,7 @@ class Product extends CI_Controller {
 	public function product_detail($id){ //取得產品內容
 
 		$data['css'] = array('/css/product.css');
-
+		$data['js'] = array('/js/basket_action.js');
 		$this->load->model('ProductModel');
 		$result = $this->ProductModel->get_product_detail($id);
 		$data['data'] = $result;
@@ -33,6 +33,10 @@ class Product extends CI_Controller {
 
 	public function go_pay(){
 		session_start();
+		if(!isset($_SESSION['user'])){
+			echo 'no_login';
+			return false;
+		}
 		$user_id = $_SESSION['user']->ID;
 
 		$data = json_decode($_POST['cookie']);

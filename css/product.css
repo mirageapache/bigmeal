@@ -101,6 +101,7 @@ div.product_detail>div>img{
 
 
 div.product_detail>div.product_info{
+	max-width: 600px;
 	padding: 30px;
 }
 
@@ -137,8 +138,7 @@ div.product_detail>div.product_info>span>label.unit_title{
 }
 
 div.product_detail>div.product_info>button{
-	width: 50%;
-	max-width: 250px;
+	width: 200px;
 	font-size: 16px;
 	margin-top: 30px;
 	padding: 10px;

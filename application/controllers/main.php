@@ -12,6 +12,7 @@ class Main extends CI_Controller {
 	public function basket() //購物籃
 	{
 		$data['pageTitle'] = '購物籃';
+		$data['js'] = array('/js/basket_action.js','/js/basket.js');
 		$this->load->view('/main/basket',$data);
 	}
 
