@@ -11,8 +11,9 @@ class User extends CI_Controller {
 		$data['css'] = array('css/user.css');
 		$data['js'] = array('js/user.js');
 		$data['pageTitle'] = '會員登入';
-		if (isset($n)) {
-			$data['n'] = $n;
+		$data['n'] = $n;
+		if ($n == '1') {
+			$data['errorMessage'] = '登入後繼續結帳訂單';
 		}
 		$this->load->view('/user/login_page',$data);
 	}
@@ -219,6 +220,7 @@ class User extends CI_Controller {
 		$name = $_POST['name'];
 		$telephone = $_POST['telephone'];
 		$cellphone = $_POST['cellphone'];
+		$post_code = $_POST['post_code'];
 		$address = $_POST['address'];
 		$email = $_POST['email'];
 		$user_id =$_SESSION['user']->ID;
@@ -234,6 +236,10 @@ class User extends CI_Controller {
 		}
 		elseif (empty($cellphone)) {
 			echo 'cellphone_null';
+			return false;
+		}
+		elseif (empty($address)) {
+			echo 'post_code_null';
 			return false;
 		}
 		elseif (empty($address)) {
@@ -269,6 +275,10 @@ class User extends CI_Controller {
 			return false;
 		}
 		elseif ($this->formclass->input_length($address,0,100) == 'over') {
+			echo 'post_code_over';
+			return false;
+		}
+		elseif ($this->formclass->input_length($address,0,100) == 'over') {
 			echo 'address_over';
 			return false;
 		}
@@ -278,7 +288,7 @@ class User extends CI_Controller {
 		}
 		else{
 			$this->load->model('UserModel');
-			$result = $this->UserModel->edit_user_info($name,$telephone,$cellphone,$address,$email,$user_id);
+			$result = $this->UserModel->edit_user_info($name,$telephone,$cellphone,$post_code,$address,$email,$user_id);
 			if($result == 'success'){
 				echo 'success';
 			}

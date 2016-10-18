@@ -12,12 +12,12 @@ $(document).ready(function(){ //登入頁
 		var password = $('.login_password').val();
 
 		if(account.length == 0){
-			$('login_hint').attr('title','請輸入帳號');
+			$('hint').attr('title','請輸入帳號');
 			$('login_account').focus();
 			return false;
 		}
 		else if(password.length == 0){
-			$('login_hint').attr('title','請輸入密碼');
+			$('hint').attr('title','請輸入密碼');
 			$('login_password').focus();
 			return false;
 		}

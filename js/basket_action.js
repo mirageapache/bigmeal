@@ -29,9 +29,24 @@ function add_basket(id,name,price,unit,img_path){
 }
 
 // ---- 從購物籃取消產品 ----
-function cancel_item(index){
-
-
+function cancel_item(index,id,amount){
+	temp_arr = JSON.parse($.cookie('basket'));
+	temp_arr.splice(index,1);
+	if(temp_arr.length == 0){
+		$.cookie('basket', null, { path: '/', expires: -1 });
+	}
+	else{
+		$.cookie('basket',JSON.stringify(temp_arr),{ path: '/' });
+	}
+	$.ajax({
+		url: "/index.php/product/stock_change",
+		type: "POST",
+		data: {'id':id,'amount':amount,'act':'+'} ,
+		success: function(result){
+			
+		}
+	});
+	location.reload();
 }
 
 //--------------------------

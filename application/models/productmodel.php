@@ -11,8 +11,7 @@ class ProductModel extends CI_Model {
     	$this->db->join('product_img', 'products.product_id = product_img.product_id');
     	$query = $this->db->get();
 
-        $result = $query->result_array();
-        return $result;
+        return $query->result_array();
     }
 
     function get_product_detail($id){
@@ -28,7 +27,7 @@ class ProductModel extends CI_Model {
     function check_amount($id,$amount){
         $this->db->select('price,stock');
         $this->db->from('products');
-        $this->db->where(array('products.product_id'=>$id));
+        $this->db->where(array('product_id'=>$id));
         $query = $this->db->get();
         
         if($amount > $query->row()->stock){
@@ -39,45 +38,22 @@ class ProductModel extends CI_Model {
         }
     }
 
-    function generate_order($order_id,$user_id,$total){
-        date_default_timezone_set('Asia/Taipei');
-        $this->db->insert("order_list",Array(
-                "order_id" => $order_id,
-                "state" => 0,
-                "total" => $total,
-                "order_time" => date('Y-m-d H:i:s'),
-                "pay_time" => null,
-                "deliver_time" => null,
-                "finish_time" => null,
-                "user_id" => $user_id
-            ));
+    //修正產品庫存量
+    function stock_change($id,$amount,$act){ 
+        $this->db->select('stock');
+        $this->db->from('products');
+        $this->db->where(array('product_id'=>$id));
+        $query = $this->db->get();
+        $old_stock = $query->row()->stock; //舊庫存量
 
-      return 'success';
-    }
-
-    function generate_order_content($order_id,$data){
-        foreach ($data as $value) {
-            $this->db->insert("order_content",Array(
-                "order_id" => $order_id,
-                "product_id" => $value->id,
-                "amount" => $value->amount,
-                "sub_total" => $value->sub_total
-            ));
+        if($act == '+'){
+            $new_stock = $old_stock + $amount;
+            echo $act;
         }
-      return 'success';
+        else{
+            $new_stock = $old_stock - $amount;
+        }
+        $this->db->where('product_id',$id);
+        $this->db->update("products",Array("stock" => $new_stock));
     }
-
-
-    //修改資料
-    // $this->db->where('user_id',$user_id);
-    // $this->db->update("user_info",Array(
-    //     "name" => $name,
-    //     "telephone" => $telephone,
-    //     "cellphone" => $cellphone,
-    //     "address" => $address,
-    //     "email" => $email
-    // ));
-
-    // return 'success';
-
 }

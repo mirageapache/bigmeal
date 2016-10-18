@@ -2,7 +2,6 @@
 
 class Product extends CI_Controller {
 
-	
 	public function get_product() //產品資訊清單
 	{
 		$this->load->model('ProductModel');
@@ -27,45 +26,21 @@ class Product extends CI_Controller {
 
 		$this->load->model('ProductModel');
 		$result = $this->ProductModel->check_amount($id,$amount);
+		if($result != false){
+			// 修改庫存
+			$data = $this->ProductModel->stock_change($id,$amount,'-');
+		}
 		echo $result;
-
 	}
 
-	public function go_pay(){
-		session_start();
-		if(!isset($_SESSION['user'])){
-			echo 'no_login';
-			return false;
-		}
-		$user_id = $_SESSION['user']->ID;
-
-		$data = json_decode($_POST['cookie']);
-		$total = 0;
-
-		foreach ($data as $value) {
-			$total = $value->sub_total + $total;
-		}
-
-		$this->load->library('generateclass');
-		$order_id = $this->generateclass->order_id();
-		
+	public function stock_change(){ //修正產品庫存量
+		$id = $_POST['id'];
+		$amount = $_POST['amount'];
+		$act = $_POST['act'];
 
 		$this->load->model('ProductModel');
-		//新增訂單
-		$order_result = $this->ProductModel->generate_order($order_id,$user_id,$total);
-		//新增訂單內容
-		$content_result = $this->ProductModel->generate_order_content($order_id,$data);
-
-		if($order_result != 'success'){
-			echo 'order_list_wrong';
-		}
-		elseif ($content_result != 'success') {
-			echo 'order_content_wrong';
-		}
-		else{
-			echo true;
-		}
-
+		$result = $this->ProductModel->stock_change($id,$amount,$act);
+		echo $result;
 	}
 
 }

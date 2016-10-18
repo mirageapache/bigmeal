@@ -35,11 +35,6 @@ div.login_panel>form>input.btn{
 	font-size: 18px;
 }
 
-div.login_panel>form>label.login_hint {
-	font-size: 14px;
-	color: red;
-}
-
 
 /*註冊頁*/
 div.register_panel {
@@ -66,11 +61,6 @@ label.title{
 	font-size: 20px;
 }
 
-label.hint{
-	font-size: 14px;
-	color:#a70000;
-	display:none;
-}
 
 div.register_panel>input{
 	margin:10px 0;
@@ -183,4 +173,11 @@ div.edit_user_info>div>form>label{
 div.edit_user_info>div>form>.form-control{
 	margin-bottom: 10px;
 	resize: none;
+}
+
+div.edit_user_info>div>form>input.post_code{
+	width:90px;
+}
+div.edit_user_info>div>form>.hint{
+	color: #a70000;
 }

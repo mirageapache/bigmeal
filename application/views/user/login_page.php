@@ -6,9 +6,11 @@
 		<form class="login_form" action="<?=site_url("/user/login_action")?>" method="post">
 			<input class="login_account form-control" name="account" type="text" placeholder="Account" maxlength="20" />
 			<input class="login_password form-control" name="password" type="password" placeholder="Password" maxlength="20" />
-			<input class="n" name="n" type="password" value="<?php echo $n ?>" hidden/>
+			<?php if (isset($n)){ ?>
+				<input class="n" name="n" type="password" value="<?php echo $n ?>" hidden/>
+			<?php }?>
 			<?php if (isset($errorMessage)) { ?>
-				<label class="login_hint"><?=$errorMessage?></label>
+				<label class="hint" style="display: block;"><?=$errorMessage?></label>
 			<?php } ?>
 			<!-- <button class="login_btn btn btn-primary">登入</button> -->
 			<input id="danru" class="btn btn-primary" type="submit" value="登入" />

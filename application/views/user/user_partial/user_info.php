@@ -54,7 +54,7 @@
 					$('.info_data_name').find('label').text(obj[0].name);
 					$('.info_data_telephone').find('label').text(obj[0].telephone);
 					$('.info_data_cellphone').find('label').text(obj[0].cellphone);
-					$('.info_data_address').find('label').text(obj[0].address);
+					$('.info_data_address').find('label').text(obj[0].post_code+" "+obj[0].address);
 					$('.info_data_email').find('label').text(obj[0].email);
 					$('.alert').css("display","none");
 					$('.info_panel').css("display","block");

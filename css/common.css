@@ -59,4 +59,12 @@ hr {
 	margin:0px;
 }
 
+.hint{
+	/*color: #a70000;*/
+	color: yellow;
+	font-size: 15px;
+	font-weight: 500;
+	display: none;
+}
+
 

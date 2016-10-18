@@ -50,7 +50,7 @@ class UserModel extends CI_Model {
       return 'success';
     }
 
-    function edit_user_info($name,$telephone,$cellphone,$address,$email,$user_id){
+    function edit_user_info($name,$telephone,$cellphone,$post_code,$address,$email,$user_id){
         $this->db->select("*");
         $query = $this->db->get_where("user_info",Array("user_id" => $user_id));
 
@@ -59,6 +59,7 @@ class UserModel extends CI_Model {
                 "name" => $name,
                 "telephone" => $telephone,
                 "cellphone" => $cellphone,
+                "post_code" => $post_code,
                 "address" => $address,
                 "email" => $email,
                 "user_id" => $user_id
@@ -72,6 +73,7 @@ class UserModel extends CI_Model {
                 "name" => $name,
                 "telephone" => $telephone,
                 "cellphone" => $cellphone,
+                "post_code" => $post_code,
                 "address" => $address,
                 "email" => $email
             ));

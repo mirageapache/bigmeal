@@ -2,7 +2,7 @@
 
 <div class="container">
 
-	<div class="menu_panel" data-index="<?php echo $num;?>" >
+	<div class="menu_panel hidden-xs" data-index="<?php echo $num;?>">
 		<span class="tag_action" onclick="partial_view_ajax('1')">
 			<label class="user_info_label tag_label">會員資料</label>
 		</span>

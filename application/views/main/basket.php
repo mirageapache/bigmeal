@@ -61,7 +61,7 @@
 				'<td class="name">'+value.name+'</td>'+
 				'<td class="price">$NT '+value.price+'</td>'+
 				'<td class="amount">'+value.amount+'/'+value.unit+'</td>'+
-				'<td class="cancel_item"><button class="btn btn-danger btn-sm" onclick="cancel_item()">取消購買</button></td>'+
+				'<td class="cancel_item"><button class="btn btn-danger btn-sm" onclick="cancel_item('+key+','+data_arr[index].id+','+data_arr[index].amount+')">取消購買</button></td>'+
 			'</tr>');
 			total = total + value.sub_total;
 		});
@@ -71,15 +71,15 @@
 		$('.xs_price').text("$NT"+ data_arr[0].price);
 		$('.xs_amount').text("數量："+ data_arr[0].amount +" "+ data_arr[0].unit);
 		$('.xs_sub_total').text("小計 "+ data_arr[0].sub_total +"元");
-		$('.xs_cancel_item').attr("onclick","cancel_item(0)");
+		$('.xs_cancel_item').attr("onclick","cancel_item(0,"+data_arr[index].id+","+data_arr[index].amount+")");
 
-		$('.basket_panel').append('<button class="pay btn btn-success pull-right" onclick="gopay()">總共 NT '+ total +'元 結帳</button>');
+		$('.basket_panel').append('<button class="pay btn btn-success pull-right" onclick="check_out()">總共 NT '+ total +'元 結帳</button>');
 
 		if(data_arr.length != 1){
 			$('.next').css("display","block");
 		}
-
 	}
+
 	function slide(act){
 		if(act == '+'){
 			if (index < (data_arr.length-1)) {
@@ -96,7 +96,7 @@
 		$('.xs_price').text("$NT"+ data_arr[index].price);
 		$('.xs_amount').text("數量："+ data_arr[index].amount +" "+ data_arr[index].unit);
 		$('.xs_sub_total').text("小計 "+ data_arr[index].sub_total +"元");
-		$('.xs_cancel_item').attr("onclick","cancel_item("+index+")");
+		$('.xs_cancel_item').attr("onclick","cancel_item("+index+","+data_arr[index].id+","+data_arr[index].amount+")");
 
 		$('.prev').css("display","block");
 		$('.next').css("display","block");
@@ -107,9 +107,10 @@
 			$('.prev').css("display","none"); index = 0;
 		}
 	}
-	function gopay(){
+
+	function check_out(){
 		$.ajax({
-			url: "/index.php/product/go_pay",
+			url: "/index.php/order/check_out",
 			type: "POST",
 			data: {'cookie':$.cookie('basket')} ,
 			success: function(result){
@@ -117,12 +118,14 @@
 					if(result == 'no_login'){
 						location.href = "<?=site_url('/user/login_page/1')?>";
 					}
-					else{
+					else if(result == 'success'){
 						$.cookie('basket', null, { path: '/', expires: -1 });
 						location.replace("<?=site_url('/main/post_data')?>");
 					}
+					else{
+						console.log(result);
+					}
 				}
-				console.log(result);
 			}
 		});
 	}
