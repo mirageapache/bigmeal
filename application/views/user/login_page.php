@@ -19,8 +19,13 @@
 		<span><a href="<?=site_url("/user/register_page")?>"><h5><i class="icon-info-circled"></i>前往註冊</h5></a></span>
 	</div>
 </div>
-
+<?php if (isset($n) && $n == '9'){ ?>
+	<script type="text/javascript">
+		call_alert('已登出');
+	</script>
+<?php }?>
 
 </body>
 </html>
+
 

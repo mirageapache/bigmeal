@@ -7,11 +7,13 @@ class OrderModel extends CI_Model {
     }
 
     //新增暫存訂單
-    function generate_temp_order($order_id,$user_id,$total){
+    function generate_temp_order($order_id,$total,$user_id){
+    	date_default_timezone_set('Asia/Taipei');
         $this->db->insert("temp_order_list",Array(
-                "order_id" => $order_id,
+                "order_id" => strtoupper($order_id),
                 "total" => $total,
-                "user_id" => $user_id
+                "user_id" => $user_id,
+                "order_time" => date('Y-m-d H:i:s')
             ));
     	return 'success';
     }
@@ -63,6 +65,7 @@ class OrderModel extends CI_Model {
         return $order_id;
     }
 
+    // 查詢未完成訂單
     function get_temp_order($user_id){
     	$this->db->select('order_id');
     	$this->db->from('temp_order_list');
@@ -75,9 +78,9 @@ class OrderModel extends CI_Model {
     	else{
     		return false;
     	}
-
     }
 
+    // 查詢單筆訂單資訊(order_list)
     function get_order($order_id){
     	$this->db->select('*');
     	$this->db->from('order_list');
@@ -85,6 +88,39 @@ class OrderModel extends CI_Model {
     	$query = $this->db->get();
 
     	return $query->row_array();
+    }
+
+    // 查詢訂單列表
+    function get_order_list($condition,$start_date,$end_date,$sort_prop,$order_by,$user_id){
+        $this->db->select('order_id,state,total,order_time,name');
+        $this->db->from('order_list');
+        $this->db->where(array('user_id'=>$user_id));
+        if(!empty($condition)){
+            $this->db->like(array('order_id'=>$condition));
+            $this->db->or_like(array('name'=>$condition));
+        }
+        if(!empty($start_date)){
+            $this->db->where('order_time >', $start_date);
+        }
+        if(!empty($end_date)){
+            $this->db->where('order_time <', $end_date);
+        }
+        $this->db->order_by($sort_prop, $order_by);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    // 查詢訂單內容(order_content)
+    function get_order_content($order_id){
+        $this->db->select('products.name,order_content.sub_total,order_content.amount');
+        $this->db->from('order_content');
+        $this->db->join('products','order_content.product_id = products.product_id');
+        $this->db->where(array('order_content.order_id'=>$order_id));
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
 }

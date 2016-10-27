@@ -38,6 +38,12 @@ function black_panel(){
 window.onresize = function(event) {
 	if(event.target.innerWidth >= 766){
     	black_panel();
+    	filter_switch('open');  //使用者>查詢訂單
+    	switch_detail_info('open');
+	}
+	else{
+    	filter_switch('close');
+
 	}
 
 	// left menu 登出鈕的位置
@@ -48,6 +54,39 @@ window.onresize = function(event) {
 		$('.xs_logout').css("position","absolute");
 	}
 };
+
+function call_alert(text){
+	$('#alert_text').text(text);
+	$('#alert').css("opacity","1");
+	$('#alert').show();
+	$('#alert').delay(3000).fadeTo(2000, 0);
+	$('#alert').hide(0);
+
+	$('#alert_text_xs').text(text);
+	$('#alert_xs').css("opacity","1");
+	$('#alert_xs').show();
+	$('#alert_xs').delay(3000).fadeTo(2000, 0);
+	$('#alert_xs').hide(0);
+}
+
+function order_state_convert(state){
+	if (state == 0) {
+		state = "新訂單，等待審核";
+	}
+	else if(state == 1){
+		state = "等待出貨";
+	}
+	else if(state == 2){
+		state = "已出貨";
+	}
+	else if(state == 3){
+		state = "狀態3";
+	}
+	else if(state == 9){
+		state = "已完成";
+	}
+	return state;
+}
 
 $(document).ready(function(){
 	// 不可反白選取

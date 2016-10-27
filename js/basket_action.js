@@ -19,6 +19,7 @@ function add_basket(id,name,price,unit,img_path){
 					temp_arr.push({id:id, name:name, price:price, amount:amount, unit:unit, img_path:img_path, sub_total:sub_total});
 					$.cookie('basket',JSON.stringify(temp_arr),{ path: '/' });
 				}
+				call_alert('已加入購物籃');
 			}
 			else{ //庫存不足
 
@@ -46,6 +47,7 @@ function cancel_item(index,id,amount){
 			
 		}
 	});
+	call_alert('已從購物籃移除');
 	location.reload();
 }
 

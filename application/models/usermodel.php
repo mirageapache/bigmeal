@@ -30,8 +30,7 @@ class UserModel extends CI_Model {
         }
         else{
             return null;
-        }
-        
+        }  
     }
 
     //註冊
@@ -50,6 +49,7 @@ class UserModel extends CI_Model {
       return 'success';
     }
 
+    // 修改會員資訊
     function edit_user_info($name,$telephone,$cellphone,$post_code,$address,$email,$user_id){
         $this->db->select("*");
         $query = $this->db->get_where("user_info",Array("user_id" => $user_id));
@@ -82,4 +82,28 @@ class UserModel extends CI_Model {
         }
     }
 
+    // 記錄使用者連線資訊
+    function user_log($user_id){
+        date_default_timezone_set('Asia/Taipei');
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+          $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+          $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+          $ip=$_SERVER['REMOTE_ADDR'];
+        }
+
+        $this->db->insert("user_log",Array(
+            "time" => date('Y-m-d H:i:s'),
+            "ip" => $ip,
+            "os_info" => $_SERVER["HTTP_USER_AGENT"],
+            "user_id" => $user_id
+        ));
+
+    }
 }

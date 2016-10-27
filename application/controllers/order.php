@@ -17,12 +17,16 @@ class Order extends CI_Controller {
 			$total = $value->sub_total + $total;
 		}
 
-		$this->load->library('generateclass');
-		$order_id = $this->generateclass->order_id();
+		//產生 order_id
+		date_default_timezone_set('Asia/Taipei');
+        $order_id = date('Ymd-');
+        for($i=0;$i<=5;$i++){
+           $order_id = $order_id.dechex(rand(1,16));
+        }
 		
 		$this->load->model('OrderModel');
 		//新增暫存訂單
-		$order_result = $this->OrderModel->generate_temp_order($order_id,$user_id,$total);
+		$order_result = $this->OrderModel->generate_temp_order($order_id,$total,$user_id);
 		//新增訂單內容
 		$content_result = $this->OrderModel->generate_order_content($order_id,$data);
 
@@ -82,7 +86,6 @@ class Order extends CI_Controller {
 			$_SESSION['finish_order'] = true;
 			echo 'success';
 		}
-
 	}
 
 }

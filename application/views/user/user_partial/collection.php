@@ -1,1 +1,2 @@
-<h3>收藏</h3>
+<h3 class="no_margin">收藏</h3>
+<hr/>

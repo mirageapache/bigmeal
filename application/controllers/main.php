@@ -4,13 +4,19 @@ class Main extends CI_Controller {
 
 	
 	public function index() //首頁
-	{
+	{	
+		if(empty($_COOKIE['log_time'])){
+			$this->load->model('UserModel');
+			$result = $this->UserModel->user_log('');
+			setcookie('log_time','time',time()+30);
+		}
+
 		$data['css'] = array('/css/product.css');
 		$this->load->view('index',$data);
 	}
 
 	public function basket() //購物籃
-	{
+	{	
 		$data['pageTitle'] = '購物籃';
 		$data['js'] = array('/js/basket_action.js','/js/basket.js');
 		$this->load->view('/main/basket',$data);
@@ -53,6 +59,7 @@ class Main extends CI_Controller {
 			$this->load->view('/main/finish_buying',$data);
 		}
 	}
+
 
 }
 

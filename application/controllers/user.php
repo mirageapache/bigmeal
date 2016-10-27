@@ -61,7 +61,7 @@ class User extends CI_Controller {
 	public function logout() { //登出
 		session_start();
 		session_destroy();
-		redirect(site_url("/user/login_page/_")); //轉回登入頁
+		redirect(site_url("/user/login_page/9")); //轉回登入頁
 	}
 
 	public function register_page() { //註冊頁
@@ -100,7 +100,6 @@ class User extends CI_Controller {
 			return false;
 		}
 		
-
 		$result = $this->formclass->input_length($account,4,20);
 		$this->load->model('UserModel');
 		$db_result = $this->UserModel->account_check($account);
@@ -123,10 +122,17 @@ class User extends CI_Controller {
 			return false;
 		}
 
+		// 產生 user_id
+		$id = '';
+    	for($i=0;$i<=36;$i++){
+    		if($i == 9 or $i == 14 or $i == 19 or $i ==24){
+    			$id = $id."-";
+    		}
+    		else{
+				$id = $id.dechex(rand(1,16));
+    		}
+    	}
 		
-
-		$this->load->library('GenerateClass');
-        $id = $this->GenerateClass->user_id(); //呼叫產生User Id
 		$create_date = date('y/m/d'); //註冊日期
 
 		$result = $this->UserModel->register($id,$account,$password,$email,$create_date);
@@ -297,6 +303,42 @@ class User extends CI_Controller {
 			}
 		}
 
+	}
+
+	public function get_order_list(){
+		session_start();
+		$user_id = $_SESSION['user']->ID;
+
+		$condition = $_POST['condition'];
+		$start_date = $_POST['start_date'];
+		$end_date = $_POST['end_date'];
+		$sort_prop = $_POST['sort_prop'];
+		$order_by = $_POST['order_by'];
+
+		$this->load->model('OrderModel');
+		$result = $this->OrderModel->get_order_list($condition,$start_date,$end_date,$sort_prop,$order_by,$user_id);
+		echo json_encode($result); // 查詢訂單列表
+		
+	}
+
+	public function get_order_detail_info(){  // 查詢訂單->訂單資訊
+
+		$order_id = $_POST['order_id'];
+
+		$this->load->model('OrderModel');
+		$result = $this->OrderModel->get_order($order_id);
+		echo json_encode($result);
+		
+	}
+
+	public function get_order_detail_content(){  // 查詢訂單->訂單內容
+
+		$order_id = $_POST['order_id'];
+
+		$this->load->model('OrderModel');
+		$result = $this->OrderModel->get_order_content($order_id);
+		echo json_encode($result);
+		
 	}
 
 }

@@ -7,21 +7,21 @@
 		<form class="">
 			<label><input class="same_user" type="checkbox" name="same_user"></input> 同會員資料</label>
 			<h4 class="title">*收件人
-				<label class="hint name_hint pull-right">收件人必填</label>
+				<label class="hint name_hint pull-right"></label>
 				<input class="name form-control" type="text" />
 			</h4>
 
 			<h4 class="title">*地址
-				<label class="hint address_hint pull-right">收件人必填</label>
+				<label class="hint address_hint pull-right"></label>
 				<input class="post_code form-control" placeholder="郵地區號" />
 				<textarea class="address form-control" ></textarea>
 			</h4>
 			<h4 class="title">*電話/手機
-				<label class="hint phone_hint pull-right">收件人必填</label>
+				<label class="hint phone_hint pull-right"></label>
 				<input class="phone form-control" type="text" />
 			</h4>
 			<h4 class="title">E-mail
-				<label class="hint email_hint pull-right">收件人必填</label>
+				<label class="hint email_hint pull-right"></label>
 				<input class="email form-control" type="text" />
 			</h4>
 

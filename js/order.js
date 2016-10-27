@@ -67,25 +67,25 @@ function new_order(){
 
 	$('.hint').css("display","none");
 	if (name.length == 0){
-		$('.name_hint').value = "收件人姓名必填";
+		$('.name_hint').text("收件人姓名必填");
 		$('.name_hint').css("display","block");
 		$('.name').focus();
 		return false;
 	} 
 	else if(post_code.length == 0){
-		$('.address_hint').value = "郵地區號必填";
+		$('.address_hint').text("郵地區號必填");
 		$('.address_hint').css("display","block");
 		$('.post_code').focus();
 		return false;
 	}
 	else if(address.length == 0 ){
 		$('.address_hint').css("display","block");
-		$('.address_hint').value = "地址必填";
+		$('.address_hint').text("地址必填");
 		$('.address').focus();
 		return false;
 	}
 	else if(phone.length == 0 ){
-		$('.phone_hint').value = "電話/手機必填";
+		$('.phone_hint').text("電話/手機必填");
 		$('.phone_hint').css("display","block");
 		$('input[name="telephone"]').focus();
 		return false;
@@ -98,7 +98,7 @@ function new_order(){
 			type:"POST",
 			success: function(result){
 				if (result == 'success') {
-					location.replace("<?=site_url('/main/finish_buying')?>");
+					location.replace('/index.php/main/finish_buying');
 				}
 				console.log(result);
 			}
@@ -108,3 +108,5 @@ function new_order(){
 	}
 
 }
+
+

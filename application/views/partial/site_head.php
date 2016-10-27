@@ -41,7 +41,6 @@
 	   <script type="text/javascript" src="<?=base_url().$js;?>" ></script>
 	<?php endforeach; }?>
 
-
 </head>
 <body>
 
@@ -63,7 +62,7 @@
 			<?php if (isset($_SESSION['user'])) { ?>
 			
 			<label class="user_name pull-right" onclick="open_user()"><?php echo $_SESSION['user']->account ?>
-				<span class="caret"></span>
+				<i class="icon-down-dir"></i>
 			</label>
 			
 			<div class="user_option">
@@ -89,25 +88,25 @@
 			</form>
 		</span>
 
-		
 	</nav>
 
 	<!-- 小螢幕導覽列 -->
-	<div class="navbar-xs visible-xs">
+	<div class="navbar_xs visible-xs">
 		<button class="left_menu_btn" onclick="open_left_menu()"><i class="icon-menu"></i></button>
 		<a class="brand" href="<?=site_url("/main/index")?>">青食市集</a>
 		<a class="basket_link pull-right" href="<?=site_url("/main/basket")?>" title="購物籃" ><i class="icon-th-large"></i></a>
 	</div>
 
 	<!-- 左側選單 -->
-	<div id="left_menu" class="hidden-sm hidden-md hidden-lg" data-show="false">
+	<div id="left_menu" class="visible-xs" data-show="false">
 		<div>
 			<?php if (!isset($_SESSION['user'])) { ?>
 				<button class="xs_login btn btn-primary" onclick="login()">登入</button>
 			<?php } ?>		
 			<?php if (isset($_SESSION['user'])) { ?>
 			<label class="user_name" onclick="open_user()"><?php echo $_SESSION['user']->account ?>
-				<span class="caret"></span>
+				<!-- <span class="caret"></span> -->
+				<i class="icon-down-dir"></i>
 			</label>
 			<div class="user_option">
 				<div class="triangle"></div>
@@ -131,6 +130,23 @@
 		</div>
 	</div>
 	<div id="black_panel" onclick="black_panel()"></div>
+	
+	<!-- 訊息框 -->
+	<div id="alert" class="hidden-xs" hidden>
+		<h4 id="alert_text">
+			message box!!
+		</h4>
+	</div>
+
+	<!-- 小訊息框 -->
+	<div id="alert_xs" class="hidden-sm hidden-md hidden-lg" hidden>
+		<label id="alert_text_xs">
+			message box!!
+		</label>
+	</div>
+
+	<!-- <button class="btn" onclick="call_alert('123456789')">test</button> -->
+	
 
 <script type="text/javascript">
 	function login(){
