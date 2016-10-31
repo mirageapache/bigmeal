@@ -37,7 +37,6 @@ $(document).ready(function(){
 		}
 	})
 
-
 });
 
 // 收件人資料新增訂單

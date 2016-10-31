@@ -1,12 +1,3 @@
-<!--  
-<a class="product_item" href="">
-	<div class="product_img" style="background-image: url('/data/products/fruit/1111.jpg');"></div>
-	<div class="product_info">
-		<p class="product_name">旺來山土鳳梨</p>
-		<label class="price">$NT 200</label>
-	</div>
-</a>
- -->
 <script type="text/javascript">
 	$.ajax({
         url: "/index.php/product/get_product",

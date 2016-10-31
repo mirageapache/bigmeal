@@ -37,7 +37,6 @@
 			<label class="prev" onclick="slide('-')"><i class="icon-left-open"></i></label>
 		</div>
 		<hr style="border-color:#ddd;">
-		
 	</div>
 </div>
 </body>
@@ -129,4 +128,5 @@
 			}
 		});
 	}
+
 </script>

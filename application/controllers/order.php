@@ -26,6 +26,7 @@ class Order extends CI_Controller {
 		
 		$this->load->model('OrderModel');
 		//新增暫存訂單
+		$result = $this->OrderModel->delete_temp_order($user_id);
 		$order_result = $this->OrderModel->generate_temp_order($order_id,$total,$user_id);
 		//新增訂單內容
 		$content_result = $this->OrderModel->generate_order_content($order_id,$data);

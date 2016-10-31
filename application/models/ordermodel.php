@@ -18,6 +18,26 @@ class OrderModel extends CI_Model {
     	return 'success';
     }
 
+    //刪除未完成訂單
+    function delete_temp_order($user_id){
+        $this->db->select('product_id,amount');
+        $this->db->from('temp_order_list');
+        $this->db->join('order_content','temp_order_list.order_id = order_content.order_id');
+        $this->db->where(array('user_id'=>$user_id));
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row) {
+                $this->db->select("stock");
+                $this->db->where('product_id',$row->product_id);
+                $stock = $stock + $row->amount;
+                $this->db->where('product_id',$row->product_id);
+                $this->db->update("products",Array("stock" => $stock));
+            }
+            $this->db->delete('temp_order_list', array('user_id' => $user_id));
+        }
+    }
+
     //新增訂單內容
     function generate_order_content($order_id,$data){
         foreach ($data as $value) {

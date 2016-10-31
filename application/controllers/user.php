@@ -49,6 +49,9 @@ class User extends CI_Controller {
 				return true;
 			}
 			$_SESSION["user"] = $user;
+			// 清除user 的temp_order
+			$this->load->model('OrderModel');
+			$this->OrderModel->delete_temp_order($_SESSION["user"]->ID);
 			if ($n == '1') {
 				redirect(site_url("/main/basket"));
 			}
@@ -59,6 +62,9 @@ class User extends CI_Controller {
 	}
 
 	public function logout() { //登出
+		// 清除user 的temp_order
+		$this->load->model('OrderModel');
+		$this->OrderModel->delete_temp_order($_SESSION["user"]->ID);
 		session_start();
 		session_destroy();
 		redirect(site_url("/user/login_page/9")); //轉回登入頁
@@ -218,7 +224,6 @@ class User extends CI_Controller {
 		else{
 			echo json_encode($result);
 		}
-
 	}
 
 	public function edit_user_info(){ //新增或修改會員資料
@@ -302,10 +307,9 @@ class User extends CI_Controller {
 				echo 'error';
 			}
 		}
-
 	}
 
-	public function get_order_list(){
+	public function get_order_list(){  // 查詢訂單列表
 		session_start();
 		$user_id = $_SESSION['user']->ID;
 
@@ -317,8 +321,7 @@ class User extends CI_Controller {
 
 		$this->load->model('OrderModel');
 		$result = $this->OrderModel->get_order_list($condition,$start_date,$end_date,$sort_prop,$order_by,$user_id);
-		echo json_encode($result); // 查詢訂單列表
-		
+		echo json_encode($result); 
 	}
 
 	public function get_order_detail_info(){  // 查詢訂單->訂單資訊
@@ -327,8 +330,7 @@ class User extends CI_Controller {
 
 		$this->load->model('OrderModel');
 		$result = $this->OrderModel->get_order($order_id);
-		echo json_encode($result);
-		
+		echo json_encode($result);	
 	}
 
 	public function get_order_detail_content(){  // 查詢訂單->訂單內容
@@ -338,7 +340,6 @@ class User extends CI_Controller {
 		$this->load->model('OrderModel');
 		$result = $this->OrderModel->get_order_content($order_id);
 		echo json_encode($result);
-		
 	}
 
 }

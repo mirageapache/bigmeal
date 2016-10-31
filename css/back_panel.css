@@ -1,0 +1,129 @@
+body{
+	background-color:white;
+	color: black;
+}
+
+#back_panel{
+	position: fixed;
+	right: 0px;
+	width: calc(100% - 280px);
+	max-width: 1100px;
+	height: 100%;
+	padding: 10px;
+	overflow: auto;
+}
+#back_panel_menu{
+	position: fixed;
+	width: 280px;
+	height: 100%;
+	background-color: #343131;
+	color: #aaa;
+	font-size: 18px;
+	z-index: 100;
+	padding: 20px 0;
+}
+@media screen and (min-width: 0px) and (max-width: 766px){
+	#back_panel_menu{
+		left: -280px;
+	}
+}
+
+span.menu_tag{
+	background-color: rgba(100,100,100,0.2);
+	position: absolute;
+	top:0px;
+	left: 0px;
+	padding:6px;
+}
+
+#back_panel_menu>div>ul.menu_item{
+	list-style-type: none;
+	padding: 0px;
+}
+
+#back_panel_menu>div>ul.menu_item>li{
+	font-size: 20px;
+	margin: 0;
+	/*border: 1px solid red;*/
+	padding: 10px 20px;
+	cursor: pointer;
+}
+#back_panel_menu>div>ul.menu_item>li:hover{
+	background-color: #4e4a4a;
+}
+#back_panel_menu>div>ul.menu_item>li.action{
+	background-color: white;
+	color:#444;
+}
+
+#back_panel>h2{
+	margin: 10px 20px 10px;
+	border-bottom: 1px solid gray;
+	padding-bottom:5px; 
+}
+
+/* ----------  總覽  ------------*/
+div.overview{
+	display: inline-block;
+	width: 100%;
+	padding: 0.5%;
+}
+
+div.overview>span.info_item{
+	position: relative;
+	display: block;
+	height: 100px;
+	float: left;
+	margin: 20px 1%;
+	border: 3px solid #2e6da4;
+	border-radius: 3px;
+	padding: 10px;
+	text-align: center;
+	box-shadow: 5px 5px 5px #999;
+}
+@media screen and (min-width: 0px) and (max-width: 450px){
+	div.overview>span.info_item{
+		width: 100%;
+	}
+}
+@media screen and (min-width: 450px) and (max-width: 1025px){
+	div.overview>span.info_item{
+		width: 48%;
+	}
+}
+@media screen and (min-width: 1025px) {
+	div.overview>span.info_item{
+		width: 31%;
+	}
+}
+
+
+div.overview>span.info_item>label.title{
+	position: absolute;
+	background-color: white;
+	font-size: 20px;
+	font-weight:normal;
+	top: -18px;
+	left: 10px;
+	/*border: 3px solid;*/
+	/*border-radius: 5px;*/
+	padding: 5px 10px;
+
+}
+
+div.overview>span.info_item>label.content{
+	font-size: 36px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	overflow:hidden;
+	display: inline-block;
+	height: 40px;
+	margin: 15px 5px 0;
+	padding-top: 10px;
+}
+div.overview>span.info_item>label.unit{
+	position: relative;
+	font-size: 24px;
+	top: -5px;
+}

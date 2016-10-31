@@ -260,4 +260,14 @@ function switch_detail_info(state){
 	}
 }
 
+window.onresize = function(event) {
+	if(event.target.innerWidth >= 766){
+    	filter_switch('open');  //使用者>查詢訂單
+    	switch_detail_info('open');
+	}
+	else{
+    	filter_switch('close');
+	}
+};
+
 </script>

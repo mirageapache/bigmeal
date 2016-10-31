@@ -1,3 +1,9 @@
+body{
+	background-image: 
+	url(/data/image/nav_bg.jpg);
+	color: white;
+}
+
 /* NavBar */
 .navbar{
 	background: rgba(50, 50, 50, 0.5);
@@ -230,18 +236,7 @@ span.search>form>input{
 	padding: 10px 20px;
 }
 
-
 /* 訊息框 End */
-
-#black_panel{
-	position: fixed;
-	width:100%;
-	height:100%;
-	top:0;
-	z-index:99;
-	background-color:rgba(0,0,0,0);
-	display: none;
-}
 
 /* ---- Footer ---- */
 #footer{

@@ -30,20 +30,16 @@ function black_panel(){
 		$('#left_menu').animate({left:"-280px"});
 		$('#black_panel').css("display","none");
 		$('#black_panel').css("background-color","transparent");
-		
 	}
+
 }
 
 // 螢幕大小改變
 window.onresize = function(event) {
 	if(event.target.innerWidth >= 766){
     	black_panel();
-    	filter_switch('open');  //使用者>查詢訂單
-    	switch_detail_info('open');
 	}
 	else{
-    	filter_switch('close');
-
 	}
 
 	// left menu 登出鈕的位置
