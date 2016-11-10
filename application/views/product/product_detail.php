@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="product_detail row">
 		<div class="product_img col-md-6">
-			<img src="<?=base_url("$data->path/$data->img_name.jpg")?>">
+			<img src="<?=base_url("$data->path/$data->img_name")?>">
 		</div>
 		<div class="product_info col-md-6">
 			<h2 class="name"><?php echo $data->name; ?></h2>
@@ -27,7 +27,7 @@
 			<?php if( $data->stock == 0){ ?>
 				<button class="buy_it btn btn-default" disabled="disabled">庫存不足</button>
 			<?php } else{ ?>
-				<button class="buy_it btn btn-success" onclick="add_basket('<?php echo $data->product_id; ?>','<?php echo $data->name; ?>',<?php echo $data->price; ?>,'<?php echo $data->unit; ?>','<?php echo $data->path.'/'.$data->img_name; ?>'+'.jpg')">加入菜籃</button>
+				<button class="buy_it btn btn-success" onclick="add_basket('<?php echo $data->product_id; ?>','<?php echo $data->name; ?>',<?php echo $data->price; ?>,'<?php echo $data->unit; ?>','<?php echo $data->path.'/'.$data->img_name; ?>')">加入菜籃</button>
 			<?php } ?>
 			
 <!-- 			<button class="btn btn-primary" onclick="get_cookie()">cookie</button>

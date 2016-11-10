@@ -130,22 +130,22 @@ $(document).ready(function(){ //註冊頁
 	});
 
 	// 檢查email
-	$(".email").blur(function(){
-		if ($(".email").val().length != 0) {
-			var regxp = /^([\w]+)(.[\w]+)*@([\w]+)(.[\w]{2,3}){1,2}$/;
-			if (regxp.test($(".email").val()) != true){
-				// $(".email").val("");
-				$(".email_hint").css("display","block");
-				$(".email_hint").text("email格式錯誤!!");
-				$(".email").attr("data-check","false");
-			}	
-			else{
-				$(".email_hint").css("display","none");
-				$(".email_hint").text("");
-				$(".email").attr("data-check","true");
-			}	
-		}
-	});
+	// $(".email").blur(function(){
+	// 	if ($(".email").val().length != 0) {
+	// 		var regxp = /^([\w]+)(.[\w]+)*@([\w]+)(.[\w]{2,3}){1,2}$/;
+	// 		if (regxp.test($(".email").val()) != true){
+	// 			// $(".email").val("");
+	// 			$(".email_hint").css("display","block");
+	// 			$(".email_hint").text("email格式錯誤!!");
+	// 			$(".email").attr("data-check","false");
+	// 		}	
+	// 		else{
+	// 			$(".email_hint").css("display","none");
+	// 			$(".email_hint").text("");
+	// 			$(".email").attr("data-check","true");
+	// 		}	
+	// 	}
+	// });
 
 	//註冊資料
 	$(".register_btn").click(function(){
@@ -178,17 +178,17 @@ $(document).ready(function(){ //註冊頁
 		else if( $(".password_confirm").attr("data-check") == "false"){
 			$(".password_confirm").trigger("blur");		
 		}
-		else if( $(".email").attr("data-check") == "false"){
-			if ($(".email").val().length == 0) {
-				$(".email").focus();
-				$(".email_hint").css("display","block");
-				$(".email_hint").text("email密碼必填喔!!");
-				$(".email").attr("data-check","false");
-			}
-			else{
-				$(".email").trigger("blur");		
-			}
-		}
+		// else if( $(".email").attr("data-check") == "false"){
+		// 	if ($(".email").val().length == 0) {
+		// 		$(".email").focus();
+		// 		$(".email_hint").css("display","block");
+		// 		$(".email_hint").text("email密碼必填喔!!");
+		// 		$(".email").attr("data-check","false");
+		// 	}
+		// 	else{
+		// 		$(".email").trigger("blur");		
+		// 	}
+		// }
 		else{
 			$.ajax({
 				url : "/index.php/user/register_action",
@@ -229,14 +229,14 @@ $(document).ready(function(){ //註冊頁
 						alert("確認密碼與密碼不同!!");
 						$(".password_confirm").focus();
 					}
-					else if(result == "email_null"){
-						alert("email必填喔!!");
-						$(".email").focus();
-					}
-					else if(result == "email_wrong"){
-						alert("email格式錯誤!!");
-						$(".email").focus();
-					}
+					// else if(result == "email_null"){
+					// 	alert("email必填喔!!");
+					// 	$(".email").focus();
+					// }
+					// else if(result == "email_wrong"){
+					// 	alert("email格式錯誤!!");
+					// 	$(".email").focus();
+					// }
 					else if(result == "success"){
 						//註冊成功，進行換頁 
 						console.log("成功");

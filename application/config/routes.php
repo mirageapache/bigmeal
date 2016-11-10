@@ -40,6 +40,11 @@
 
 $route['default_controller'] = "main";
 $route['404_override'] = '';
+$route['backpanel/back_main_page'] = "/backpanel/back_main_page/0";
+$route['user/login_page'] = "/user/login_page/0";
+$route['user/user_page'] = "/user/user_page/0";
+
+
 
 
 /* End of file routes.php */

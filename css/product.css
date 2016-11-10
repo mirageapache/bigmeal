@@ -143,3 +143,28 @@ div.product_detail>div.product_info>button{
 	margin-top: 30px;
 	padding: 10px;
 }
+
+/*-------  產品錯誤頁  ---------*/
+
+
+div#product_error_page{
+	background-color: rgba(50,50,50,0.5);
+	width: 100%;
+	text-align: center;
+	padding: 50px;
+}
+@media screen and (min-width: 767px){
+	div#product_error_page{
+		height: 300px;
+		border-radius: 5px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 766px){
+	body{
+		overflow: hidden;
+	}
+	div#product_error_page{
+		position: absolute;
+		height: 100%;
+	}
+}

@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-class FormClass { // 表單驗證
+class FormClass{ // 表單驗證
     
-    function input_length($input,$min,$max) // 字數限制
+    public function input_length($input,$min,$max) // 字數限制
     {
         if( $min > $max){
             $temp = $min;
@@ -21,7 +21,7 @@ class FormClass { // 表單驗證
         return 'ok';
     }
 
-    function email_check($input){
+    public function email_check($input){
         if(preg_match('/^[-_.0-9a-z]+@([-_0-9a-z][-_0-9a-z]+\.)+[a-z]{2,3}$/i',$input) == true){
             return true; // email格式正確
         }
@@ -30,7 +30,7 @@ class FormClass { // 表單驗證
         }
     }
 
-    function telephone_check($input){
+    public function telephone_check($input){
         if(preg_match('/^[0][1-9]{1,3}[-][0-9]{6,8}$/',$input) == true){
             return true; // 電話格式正確
         }
@@ -39,7 +39,7 @@ class FormClass { // 表單驗證
         }
     }
 
-    function cellphone_check($input){
+    public function cellphone_check($input){
         if(preg_match('/09[0-9]{8}/',$input) == true){
             return true; // 手機格式正確
         }

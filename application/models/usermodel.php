@@ -34,12 +34,11 @@ class UserModel extends CI_Model {
     }
 
     //註冊
-    function register($user_id,$account,$password,$email,$create_date){
+    function register($user_id,$account,$password,$create_date){
     	$this->db->insert("user",Array(
                 "ID" => $user_id,
           		"account" => $account,
                 "password" => $password,
-          		"email" => $email,
                 "create_day" => $create_date,
                 "state" => 1,
                 "user_type" => 1,

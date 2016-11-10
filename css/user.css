@@ -338,9 +338,6 @@ div.user_order_detail>div>div.detail_info>div>label>label{
 }
 
 /*==========  detail_content  ==============*/
-div.user_order_detail>div>div.detail_content{
-	
-}
 div.user_order_detail>div>div.detail_content>table{
 	width: 100%;
 	padding: 10px;

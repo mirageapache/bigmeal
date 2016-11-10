@@ -21,7 +21,7 @@ class Order extends CI_Controller {
 		date_default_timezone_set('Asia/Taipei');
         $order_id = date('Ymd-');
         for($i=0;$i<=5;$i++){
-           $order_id = $order_id.dechex(rand(1,16));
+           $order_id = $order_id.dechex(rand(0,15));
         }
 		
 		$this->load->model('OrderModel');

@@ -10,7 +10,8 @@ body{
 	max-width: 1100px;
 	height: 100%;
 	padding: 10px;
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 #back_panel_menu{
 	position: fixed;
@@ -62,14 +63,54 @@ span.menu_tag{
 	padding-bottom:5px; 
 }
 
+.filter{
+	font-size: 16px;
+	max-width: 500px;
+	display: inline-block;
+}
+.alert_panel{
+	width: 100%;
+	font-size: 24px;
+	padding: 20px;
+}
+
+.page_panel{
+	display: inline-block;
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+	padding: 25px 0 15px;
+}
+.page_panel>span.page_button{
+	margin: 0 3px 0;
+	border: 1px solid gray;
+	padding: 5px 2px;
+}
+.page_panel>span.page_button:hover{
+	cursor:pointer;
+	background-color: gray;
+}
+.page_panel>span.page_button_action{
+	color: #f39635;
+	margin: 0 3px 0;
+	border: 1px solid #f39635;
+	padding: 5px 2px;
+}
+.page_panel>span>label{
+	width: 20px;
+}
+.page_panel>span.page_button>label{
+	cursor:pointer;
+}
+
 /* ----------  總覽  ------------*/
-div.overview{
+div#overview{
 	display: inline-block;
 	width: 100%;
 	padding: 0.5%;
 }
 
-div.overview>span.info_item{
+div#overview>span.info_item{
 	position: relative;
 	display: block;
 	height: 100px;
@@ -82,23 +123,22 @@ div.overview>span.info_item{
 	box-shadow: 5px 5px 5px #999;
 }
 @media screen and (min-width: 0px) and (max-width: 450px){
-	div.overview>span.info_item{
+	div#overview>span.info_item{
 		width: 100%;
 	}
 }
 @media screen and (min-width: 450px) and (max-width: 1025px){
-	div.overview>span.info_item{
+	div#overview>span.info_item{
 		width: 48%;
 	}
 }
 @media screen and (min-width: 1025px) {
-	div.overview>span.info_item{
+	div#overview>span.info_item{
 		width: 31%;
 	}
 }
 
-
-div.overview>span.info_item>label.title{
+div#overview>span.info_item>label.title{
 	position: absolute;
 	background-color: white;
 	font-size: 20px;
@@ -108,10 +148,9 @@ div.overview>span.info_item>label.title{
 	/*border: 3px solid;*/
 	/*border-radius: 5px;*/
 	padding: 5px 10px;
-
 }
 
-div.overview>span.info_item>label.content{
+div#overview>span.info_item>label.content{
 	font-size: 36px;
 	white-space:nowrap;
 	text-overflow:ellipsis;
@@ -122,8 +161,247 @@ div.overview>span.info_item>label.content{
 	margin: 15px 5px 0;
 	padding-top: 10px;
 }
-div.overview>span.info_item>label.unit{
+div#overview>span.info_item>label.unit{
 	position: relative;
 	font-size: 24px;
 	top: -5px;
 }
+
+/* -----------  data table  ----------- */
+table.content_table,
+div.content_table_xs{
+	font-size: 20px;
+	width: 100%;
+	margin-top: 5px;
+}
+table.content_table>tbody>tr.table_title{
+	border-bottom: 1px solid #888;
+}
+table.content_table>tbody>tr.table_content:hover{
+	background-color: #ffb;
+	cursor: pointer;
+}
+tr.table_content:nth-child(odd) {
+	background: #ccc;
+}
+table.content_table>tbody>tr>th,
+table.content_table>tbody>tr>td{
+	padding: 5px;
+}
+
+.content_table_xs>.table_item{
+	border-bottom: 1px solid #888;
+	padding: 0 10px;
+	display: block;
+	cursor:pointer;
+}
+.content_table_xs>.table_item>h3{
+	margin: 10px 0;
+	font-weight: 700;
+}
+
+
+/* ----------  會員管理  ------------*/
+
+#user_mg>table>tbody>tr>td.account{
+	min-width: 150px;
+	display: inline-block;
+	overflow: hidden
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+}
+
+/* ----------  編輯會員  ------------*/
+#user_mg_detail{
+	padding: 10px;
+}
+#user_mg_detail>div>h3{
+	border-bottom: 1px solid gray;
+}
+
+#user_mg_detail>div>table{
+	width: 100%;
+	font-size:18px;
+}
+#user_mg_detail>div>table>tbody>tr>td{
+	padding: 10px;
+	border:1px solid gray;
+}
+#user_mg_detail>div>table>tbody>tr>td.title{
+	width: 115px;
+}
+#user_mg_detail>div>table>tbody>tr>td.user_type{
+	cursor: pointer;	
+}
+#user_mg_detail>div>table>tbody>tr>td.modify>select{
+	float: left;
+	font-size: 15px;
+	width: 80%;
+}
+#user_mg_detail>div>table>tbody>tr>td.modify>i{
+	color: gray;
+	margin: 3px;
+	padding: 2px;
+	float: right;
+}
+#user_mg_detail>div>table>tbody>tr>td.modify>i:hover{
+	color: red;
+	cursor: pointer;
+}
+#user_mg_detail>div>table .edit{
+	font-size: 12px;
+}
+
+/* ----------  產品管理  ------------*/
+.cancel_edit{
+	color: gray;
+	font-size: 16px;
+	padding:5px;
+}
+.cancel_edit:hover{
+	color: red;
+	cursor: pointer;
+}
+
+#product_mg .check_td{
+	width: 30px;
+}
+#product_mg .check_td .check_item,
+#product_mg .check_td .all_check{
+	width: 16px;
+	height: 16px;
+}
+#product_mg .check_label{
+	float: left;
+	margin-left: -10px;
+	padding: 30px 10px;
+}
+
+/* ----------  新增產品  ------------*/
+#product_mg_insert>div,
+#product_mg_detail>div{
+	margin: 15px 0;
+	padding: 0 10px;
+	width: 100%;
+}
+#product_mg_insert>div>div,
+#product_mg_detail>div>div{
+	padding: 5px;
+}
+#product_mg_insert .img_div,
+#product_mg_detail .img_div{
+	/*background-image: url('/data/image/upload.png');*/
+	background-repeat: no-repeat;
+	background-position: center;
+	display:inline-block;
+	width: 250px;
+	height: 250px;
+	cursor: pointer;
+}
+#product_mg_insert .product_img,
+#product_mg_detail .product_img{
+	border: 1px solid gray;
+	width: 250px;
+	height: 250px;
+}
+#product_mg_insert .upload_hint,
+#product_mg_detail .upload_hint{
+	background-color: rgba(30,30,30,0.5);
+	position: absolute;
+	bottom: 6px;
+	font-size: 20px;
+	width: 250px;
+	color: white;
+	text-align:center;
+	padding: 10px;
+}
+
+#product_mg_insert .label_title,
+#product_mg_detailproduct_mg_detail .label_title{
+	font-size: 18px;
+	margin: 10px 0 0;
+}
+#product_mg_insert .hint,
+#product_mg_detailproduct_mg_detail .hint{
+	color: #a70000;
+	margin: 0 10px;
+}
+
+#product_mg_insert input,
+#product_mg_insert select,
+#product_mg_insert textarea,
+#product_mg_detail input,
+#product_mg_detail select,
+#product_mg_detail textarea{
+	margin:5px;
+	border-color: #888;
+	max-width: 100%;
+}
+#product_mg_insert select,
+#product_mg_detail select{
+	font-size: 16px;
+	padding-top: 3px;
+}
+
+#product_mg_insert button,
+#product_mg_detail button{
+	font-size: 16px;
+	padding: 5px 20px;
+}
+
+/* ----------  訂單內容  ------------*/
+#order_mg_detail>div>div>table{
+	font-size: 20px;
+	width: 100%;
+	margin-bottom: 30px;
+}
+#order_mg_detail>div>div>table>tbody>tr>td{
+	padding: 10px;
+	border: 1px solid gray;
+}
+#order_mg_detail>div>div>table>tbody>tr>td.title{
+	width: 130px;
+}
+#order_mg_detail>div>div>table>tbody>tr>td.state{
+	cursor: pointer;
+}
+#order_mg_detail>div>div>table>tbody>tr>td.modify_state>select{
+	width: 130px;
+	float: left;
+	font-size: 18px;
+	padding: 3px 10px;
+}
+#order_mg_detail>div>div>table>tbody>tr>td.modify_state>i{
+	color: gray;
+	padding: 5px 0;
+	float: right;
+}
+#order_mg_detail>div>div>table>tbody>tr>td.modify_state>i:hover{
+	color: red;
+	cursor: pointer;
+}
+
+#order_mg_detail>div.order_content>table{
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+}
+#order_mg_detail>div.order_content>table>tbody>tr.table_title{
+	border-bottom: 1px solid gray;
+}
+#order_mg_detail>div.order_content>table>tbody>tr>th,
+#order_mg_detail>div.order_content>table>tbody>tr>td{
+	padding:5px;
+	cursor: default;
+}
+
+#order_mg_detail>div.order_content>table>tbody>tr>td.item_no{
+	text-align: center;
+}
+
+@media screen and (min-width: 0px) and (max-width: 766px){
+	#order_mg_detail>div.order_content>table>tbody>tr>td.item_no{
+		height: 50px;
+	}
+}	

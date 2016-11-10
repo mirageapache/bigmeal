@@ -15,6 +15,9 @@ class User extends CI_Controller {
 		if ($n == '1') {
 			$data['errorMessage'] = '登入後繼續結帳訂單';
 		}
+		else if ($n == '2') {
+			$data['errorMessage'] = '登入後繼續';
+		}
 		$this->load->view('/user/login_page',$data);
 	}
 
@@ -55,6 +58,9 @@ class User extends CI_Controller {
 			if ($n == '1') {
 				redirect(site_url("/main/basket"));
 			}
+			else if($n == '2'){
+				redirect(site_url("/backpanel/back_main_page"));
+			}
 			else{
 				redirect(site_url("/"));
 			}
@@ -63,9 +69,9 @@ class User extends CI_Controller {
 
 	public function logout() { //登出
 		// 清除user 的temp_order
+		session_start();
 		$this->load->model('OrderModel');
 		$this->OrderModel->delete_temp_order($_SESSION["user"]->ID);
-		session_start();
 		session_destroy();
 		redirect(site_url("/user/login_page/9")); //轉回登入頁
 	}
@@ -81,9 +87,9 @@ class User extends CI_Controller {
 		$account = $_POST['account'];
 		$password = $_POST['password'];
 		$password_confirm = $_POST['password_confirm'];
-		$email = $_POST['email'];
+		// $email = $_POST['email'];
 		
-		$this->load->library('formclass');
+		// $this->load->library('formclass');
 
 		if(empty($account)){
 			echo 'account_null';
@@ -101,12 +107,12 @@ class User extends CI_Controller {
 			echo 'password_confirm_wrong';
 			return false;
 		}
-		else if(empty($email)) {
-			echo 'email_null';
-			return false;
-		}
+		// else if(empty($email)) {
+		// 	echo 'email_null';
+		// 	return false;
+		// }
 		
-		$result = $this->formclass->input_length($account,4,20);
+		// $result = $this->formclass->input_length($account,4,20);
 		$this->load->model('UserModel');
 		$db_result = $this->UserModel->account_check($account);
 		if($result == "less") {
@@ -122,11 +128,11 @@ class User extends CI_Controller {
 			return false;
 		}
 
-		$result = $this->formclass->email_check($email);
-		if(!$result){
-			echo 'email_wrong';
-			return false;
-		}
+		// $result = $this->formclass->email_check($email);
+		// if(!$result){
+		// 	echo 'email_wrong';
+		// 	return false;
+		// }
 
 		// 產生 user_id
 		$id = '';
@@ -135,13 +141,13 @@ class User extends CI_Controller {
     			$id = $id."-";
     		}
     		else{
-				$id = $id.dechex(rand(1,16));
+				$id = $id.dechex(rand(0,15));
     		}
     	}
 		
 		$create_date = date('y/m/d'); //註冊日期
 
-		$result = $this->UserModel->register($id,$account,$password,$email,$create_date);
+		$result = $this->UserModel->register($id,$account,$password,$create_date);
 
 		if ($result == 'success'){
 			echo $result;
@@ -209,7 +215,7 @@ class User extends CI_Controller {
 		return false;
 	}
 
-	public function get_user_data() { //抓會員資料
+	public function get_user_data() { //查詢會員資料
 		session_start();
 		if(isset($_SESSION["user"]) == false && $_SESSION["user"] == null){
 			redirect(site_url("/user/login_page/_"));
@@ -236,7 +242,7 @@ class User extends CI_Controller {
 		$email = $_POST['email'];
 		$user_id =$_SESSION['user']->ID;
 
-		$this->load->library('formclass');
+		// $this->load->library('formclass');
 		if(empty($name)){
 			echo 'name_null';
 			return false;
@@ -261,42 +267,42 @@ class User extends CI_Controller {
 			echo 'email_null';
 			return false;
 		}
-		elseif (!$this->formclass->telephone_check($telephone)) {
-			echo 'telephone_wrong';
-			return false;
-		}
-		elseif (!$this->formclass->cellphone_check($cellphone)) {
-			echo 'cellphone_wrong';
-			return false;
-		}
-		elseif (!$this->formclass->email_check($email)) {
-			echo 'email_wrong';
-			return false;
-		}
-		elseif ($this->formclass->input_length($name,0,6) == 'over') {
-			echo 'name_over';
-			return false;
-		}
-		elseif ($this->formclass->input_length($telephone,0,10) == 'over') {
-			echo 'telephone_over';
-			return false;
-		}
-		elseif ($this->formclass->input_length($cellphone,0,10) == 'over') {
-			echo 'cellphone_over';
-			return false;
-		}
-		elseif ($this->formclass->input_length($address,0,100) == 'over') {
-			echo 'post_code_over';
-			return false;
-		}
-		elseif ($this->formclass->input_length($address,0,100) == 'over') {
-			echo 'address_over';
-			return false;
-		}
-		elseif ($this->formclass->input_length($email,0,50) == 'over') {
-			echo 'email_over';
-			return false;
-		}
+		// elseif (!$this->formclass->telephone_check($telephone)) {
+		// 	echo 'telephone_wrong';
+		// 	return false;
+		// }
+		// elseif (!$this->formclass->cellphone_check($cellphone)) {
+		// 	echo 'cellphone_wrong';
+		// 	return false;
+		// }
+		// elseif (!$this->formclass->email_check($email)) {
+		// 	echo 'email_wrong';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($name,0,6) == 'over') {
+		// 	echo 'name_over';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($telephone,0,10) == 'over') {
+		// 	echo 'telephone_over';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($cellphone,0,10) == 'over') {
+		// 	echo 'cellphone_over';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($address,0,100) == 'over') {
+		// 	echo 'post_code_over';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($address,0,100) == 'over') {
+		// 	echo 'address_over';
+		// 	return false;
+		// }
+		// elseif ($this->formclass->input_length($email,0,50) == 'over') {
+		// 	echo 'email_over';
+		// 	return false;
+		// }
 		else{
 			$this->load->model('UserModel');
 			$result = $this->UserModel->edit_user_info($name,$telephone,$cellphone,$post_code,$address,$email,$user_id);
@@ -334,9 +340,7 @@ class User extends CI_Controller {
 	}
 
 	public function get_order_detail_content(){  // 查詢訂單->訂單內容
-
 		$order_id = $_POST['order_id'];
-
 		$this->load->model('OrderModel');
 		$result = $this->OrderModel->get_order_content($order_id);
 		echo json_encode($result);

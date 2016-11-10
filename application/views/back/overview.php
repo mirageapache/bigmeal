@@ -1,5 +1,5 @@
 <h2>總覽</h2>
-<div class="overview">
+<div id="overview">
 	<span class="info_item view">
 		<label class="title" style="border-color: #d23535;">今日瀏覽數</label>
 		<label class="content number">0</label>
@@ -31,49 +31,41 @@
 		<label class="unit"></label>
 	</span>
 </div>
-
 <script type="text/javascript">
-	
-$.ajax({
-	url: "/index.php/backpanel/get_overview_data",
-	type: "GET",
-	data: {},
-	success:function(result){
-		obj = JSON.parse(result);
-		console.log(obj);
+$(document).ready(function(){
+	get_overview();
+})
 
-		$('.view').find('.content').text(obj.views);
-		$('.order').find('.content').text(obj.orders);
-		$('.popular').find('.content').text(obj.popular);
-		$('.popular').find('.content').attr("title",obj.popular);
-		$('.turnover').find('.content').text(obj.turnover);
-		$('.turnover').find('.content').attr("title","$"+obj.turnover);
-		$('.user_num').find('.content').text(obj.user_num);
+function get_overview(){
+	$.ajax({
+		url: "/index.php/backpanel/get_overview_data",
+		type: "GET",
+		data: {},
+		success:function(result){
+			obj = JSON.parse(result);
 
-		$('.number').each(function(){
-			$(this).prop('Counter',0).animate({
-		        Counter: $(this).text()
-		    }, {
-		        duration: 800,
-		        easing: 'swing',
-		        step: function (now) {
-		            $(this).text(Math.ceil(now));
-		        }
-		    });
-		});
+			$('.view').find('.content').text(obj.views);
+			$('.order').find('.content').text(obj.orders);
+			$('.popular').find('.content').text(obj.popular);
+			$('.popular').find('.content').attr("title",obj.popular);
+			$('.turnover').find('.content').text(obj.turnover);
+			$('.turnover').find('.content').attr("title","$"+obj.turnover);
+			$('.user_num').find('.content').text(obj.user_num);
 
-
-	}
-});
-
-
-
-
-
-
-
-
-
+			$('.number').each(function(){
+				$(this).prop('Counter',0).animate({
+			        Counter: $(this).text()
+			    }, {
+			        duration: 800,
+			        easing: 'swing',
+			        step: function (now) {
+			            $(this).text(Math.ceil(now));
+			        }
+			    });
+			});
+		}
+	});
+}
 
 </script>
 

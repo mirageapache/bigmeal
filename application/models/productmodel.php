@@ -5,23 +5,29 @@ class ProductModel extends CI_Model {
         parent::__construct();
     }
 
+    // 查詢產品列表
     function get_product(){
     	$this->db->select('products.product_id, products.name, products.price, product_img.img_name, product_img.path');
     	$this->db->from('products');
     	$this->db->join('product_img', 'products.product_id = product_img.product_id');
     	$query = $this->db->get();
-
         return $query->result_array();
     }
 
+    // 查詢產品內容
     function get_product_detail($id){
     	$this->db->select('*');
     	$this->db->from('products');
     	$this->db->join('product_img', 'products.product_id = product_img.product_id');
     	$this->db->where(array('products.product_id'=>$id));
     	$query = $this->db->get();
-        $result = $query->row();
-        return $result;
+        if($query->num_rows() > 0){
+            $result = $query->row();
+            return $result;
+        }
+        else{
+            return 'null';
+        }
     }
 
     function check_amount($id,$amount){

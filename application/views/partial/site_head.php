@@ -36,6 +36,7 @@
 	<script type="text/javascript" src="<?=base_url("/package/js/bootstrap.min.js")?>"></script>
 	<script type="text/javascript" src="<?=base_url("/package/js/jquery.cookie.js")?>"></script>
 	<script type="text/javascript" src="<?=base_url("/js/partial.js")?>"></script>
+	<script type="text/javascript" src="<?=base_url("/js/common.js")?>"></script>
 
 	<?php if (isset($js)){foreach ($js as $js): ?>
 	   <script type="text/javascript" src="<?=base_url().$js;?>" ></script>
@@ -50,7 +51,7 @@
 		<span class="menu">
 			<a href="<?=site_url("")?>">蔬菜</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
 			<a href="<?=site_url("")?>">水果</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">肉品</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("")?>">肉類</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
 			<a href="<?=site_url("")?>">五穀雜糧</a>
 		</span>
 
@@ -71,6 +72,9 @@
 				<h4><a href="<?=site_url("/user/user_page/2")?>"><i class=""></i>查詢訂單</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/3")?>"><i class=""></i>購物記錄</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/4")?>"><i class=""></i>收藏商品</a></h4>
+				<?php if ($_SESSION['user']->user_type == 2) { ?>
+				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>"><i class=""></i>網站管理</a></h4>
+				<?php } ?>
 				<hr style="margin:5px 0" />
 			    <button class="logout_btn btn btn-success pull-right" onclick="logout()"><i class="icon-logout"></i>登出</button>
 			</div>
@@ -104,17 +108,19 @@
 				<button class="xs_login btn btn-primary" onclick="login()">登入</button>
 			<?php } ?>		
 			<?php if (isset($_SESSION['user'])) { ?>
-			<label class="user_name" onclick="open_user()"><?php echo $_SESSION['user']->account ?>
+			<label class="user_name" onclick="open_user_xs()"><?php echo $_SESSION['user']->account ?>
 				<!-- <span class="caret"></span> -->
 				<i class="icon-down-dir"></i>
 			</label>
-			<div class="user_option">
+			<div class="user_option_xs">
 				<div class="triangle"></div>
 				<h4><a href="<?=site_url("/user/user_page/1")?>">會員資料</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/2")?>">查詢訂單</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/3")?>">購物記錄</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/4")?>">收藏商品</a></h4>
-				
+				<?php if ($_SESSION['user']->user_type == 2) { ?>
+				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>"></i>網站管理</a></h4>
+				<?php } ?>
 			</div>
 			<?php } ?>
 

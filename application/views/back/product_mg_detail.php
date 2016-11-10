@@ -1,8 +1,8 @@
-<h2>新增產品</h2>
-<div id="product_mg_insert">
+<h2>編輯產品</h2>
+<div id="product_mg_detail">
 	<div class="row">
 		<div class="col-md-5" style="text-align:center;">
-			<form class="img_form" action="/index.php/backpanel/insert_product_img" method="POST" enctype="multipart/form-data">
+			<form class="img_form" action="/index.php/backpanel/modify_product_img" method="POST" enctype="multipart/form-data">
 				<div class="img_div">
 					<img class="product_img" src"">
 					<div class="upload_hint" hidden>上傳圖片</div>
@@ -56,12 +56,14 @@
 		<label class="label_title">產品規格 <label class="hint standard_hint pull-right"></label></label>
 		<textarea class="standard form-control"></textarea>
 	</div>
-	<button class="btn btn-success pull-right" onclick="insert_product()">新增</button>
+	<button class="btn btn-success pull-right" onclick="modify_product()">儲存</button>
 </div>
 
-
 <script type="text/javascript">
+var obj = [];
 $(document).ready(function(){
+	get_product_detail();
+
 	$('.img_div').mouseover(function(){
 		$('.upload_hint').show();
 	}).mouseout(function(){
@@ -74,11 +76,32 @@ $(document).ready(function(){
 	$('input[type=file]').on('change', function(){
 		img_preview(this);
 	});
-
 });
 
-//新增產品
-function insert_product(){
+// 查詢產品內容
+function get_product_detail(){
+	$.ajax({
+		url:'/index.php/backpanel/get_product_detail',
+		type:'GET',
+		data:{},	
+		success:function(result){
+			obj = JSON.parse(result);
+			$('.product_img').attr("src",obj[0].path+'/'+obj[0].img_name);
+			$('.name').val(obj[0].name);
+			$('.price').val(obj[0].price);
+			$('.stock').val(obj[0].stock);
+			$('.place').val(obj[0].place);
+			$('.s_type').val(obj[0].s_type);
+			$('.unit').val(obj[0].unit);
+			$('.description').val(obj[0].description);
+			$('.standard').val(obj[0].standard);
+		}
+	});
+}
+
+// 修改產品內容
+function modify_product(){
+	isChange = false;
 	$('.hint').hide();
 	temp_arr = ['name','price','stock','place','s_type','unit','description','standard'];
 	for (i=0; i<=temp_arr.length-1;i++) {
@@ -101,31 +124,33 @@ function insert_product(){
 	standard = $('.standard').val();
 
 	$.ajax({
-		url:'/index.php/backpanel/insert_product',
+		url:'/index.php/backpanel/modify_product',
 		type:'POST',
-		data:{name:name,price:price,stock:stock,place:place,b_type:b_type,s_type:s_type,
-			  unit:unit,description:description,standard:standard},
+		data:{product_id:obj[0].product_id,name:name,price:price,stock:stock,place:place,b_type:b_type,s_type:s_type,
+			  unit:unit,description:description,standard:standard,
+			  img_id:obj[0].img_id,img_name:obj[0].img_name},
 		success:function(result){
 			if ($('input[type=file]').val().length > 0) {
 				$('.upload_img').trigger('click');
+			}
+			else{
+				location.replace("<?=site_url('/backpanel/back_main_page/2')?>");
 			}
 		}
 	});
 }
 
-// 圖片預覽
-function img_preview(input) {
- 	// 參考 http://jsnwork.kiiuo.com/archives/2258
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('.product_img').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-    else{
-    	$('.product_img').attr('src',"");
-    }
-}
 
+// 判斷是否正在編輯
+$(function () {
+	$('input,textarea').change(function () {
+        isChange = true;
+     });
+
+	$(window).on('beforeunload', function (e) {
+        if (isChange) {
+            return '資料尚未儲存，確定要離開該頁面？';
+        };
+    });
+});
 </script>

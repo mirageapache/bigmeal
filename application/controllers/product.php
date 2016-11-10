@@ -15,9 +15,15 @@ class Product extends CI_Controller {
 		$data['js'] = array('/js/basket_action.js');
 		$this->load->model('ProductModel');
 		$result = $this->ProductModel->get_product_detail($id);
-		$data['data'] = $result;
-
-		$this->load->view('/product/product_detail',$data);
+		if($result == 'null'){
+			// 查無產品
+			redirect(site_url("/product/error_page"));
+		}
+		else{
+			$data['data'] = $result;
+			$this->load->view('/product/product_detail',$data);
+		}
+		
 	}
 
 	public function check_amount(){ //檢查庫存量
@@ -41,6 +47,12 @@ class Product extends CI_Controller {
 		$this->load->model('ProductModel');
 		$result = $this->ProductModel->stock_change($id,$amount,$act);
 		echo $result;
+	}
+
+	public function error_page() //產品資訊清單
+	{
+		$data['css'] = array('/css/product.css');
+		$this->load->view('/product/error_page',$data);
 	}
 
 }

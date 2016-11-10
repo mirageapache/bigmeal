@@ -197,7 +197,8 @@ function submit_edit(){
 
 };
 
-$(function () { //判斷是否正在編輯
+//判斷是否正在編輯
+$(function () {
 	$('input,textarea').change(function () {
         isChange = true;
      });

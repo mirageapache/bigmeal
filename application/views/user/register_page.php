@@ -22,12 +22,6 @@
 					<input class="password_confirm form-control" type="password" placeholder="再次輸入密碼" data-check="false" maxlength="20" title="" />
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<label class="title">*E-mail</label><label class="hint email_hint pull-right"></label>
-					<input class="email form-control" type="email" placeholder="XXXXXXX@XX.XX" data-check="false" maxlength="50"/>
-				</td>
-			</tr>
 		</table>
 		<hr>
 		<br/>

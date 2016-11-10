@@ -10,7 +10,7 @@ class GenerateClass {
     			$newid = $newid."-";
     		}
     		else{
-				$newid = $newid.dechex(rand(1,16));
+				$newid = $newid.dechex(rand(0,15));
     		}
     	}
     	return $newid;
@@ -20,7 +20,7 @@ class GenerateClass {
     {
         $newid = '';
         for($i=0;$i<=9;$i++){
-           $newid = $newid.rand(1,10);
+           $newid = $newid.rand(0,9);
         }
         return $newid;
     }
@@ -33,7 +33,7 @@ class GenerateClass {
                 $newid = $newid."-";
             }
             else{
-                $newid = $newid.dechex(rand(1,16));
+                $newid = $newid.dechex(rand(0,15));
             }
         }
         return $newid;
@@ -44,7 +44,7 @@ class GenerateClass {
         date_default_timezone_set('Asia/Taipei');
         $newid = date('Ymd-');
         for($i=0;$i<=5;$i++){
-           $newid = $newid.dechex(rand(1,16));
+           $newid = $newid.dechex(rand(0,15));
         }
         return $newid;
     }
