@@ -130,6 +130,7 @@ function modify_product(){
 			  unit:unit,description:description,standard:standard,
 			  img_id:obj[0].img_id,img_name:obj[0].img_name},
 		success:function(result){
+			console.log(result);
 			if ($('input[type=file]').val().length > 0) {
 				$('.upload_img').trigger('click');
 			}

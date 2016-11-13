@@ -150,7 +150,7 @@ function sort_data(prop,xs){
 		$('.'+prop+'_xs').prop("selected","true");
 	}
 	else{
-		if ($('.asc').prop("checked") == true) {
+		if ($('.asc').prop("checked") == true) {	
 			$('.'+prop).find('i').attr("class","icon-up-dir");
 		}
 		else{

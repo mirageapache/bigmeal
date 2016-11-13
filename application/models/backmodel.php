@@ -155,8 +155,8 @@ class BackModel extends CI_Model {
     // 查詢產品內容
     function get_product_detail($product_id){
         $this->db->select('*');
-        $this->db->from('products');
-        $this->db->join('product_img','products.product_id = product_img.product_id');
+        $this->db->from('product_img');
+        $this->db->join('products','product_img.product_id = products.product_id','right');
         $this->db->where('products.product_id',$product_id);
         $query = $this->db->get();
         
@@ -176,13 +176,28 @@ class BackModel extends CI_Model {
             'unit' => $unit,
             'description' => $description,
             'standard' => $standard));
-        return 'success';
+        return $product_id;
     }
 
     // 修改產品圖片
     function modify_product_img($img_id,$img_name){
         $this->db->where('img_id',$img_id);
         $this->db->update('product_img',array('img_name' => $img_name,'path' => '/data/products'));
+    }
+
+    // 查詢欲刪除產品圖片名稱
+    function get_img_name($data_array){
+        $img_arr = [];
+        foreach ($data_array as $id) {
+            $this->db->select('img_name');
+            $this->db->from('product_img');
+            $this->db->where('product_id',$id);
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                array_push($img_arr, $query->row()->img_name);
+            }
+        }
+        return $img_arr;
     }
 
     // 刪除產品
@@ -208,7 +223,7 @@ class BackModel extends CI_Model {
         return $query->result_array();
     }
    
-    // 查詢產品內容
+    // 查詢訂單內容
     function get_order_detail($order_id){
         $this->db->select('order_list.*,user.account');
         $this->db->from('order_list');
@@ -219,6 +234,7 @@ class BackModel extends CI_Model {
         return $query->result_array();
     }
 
+    // 修改訂單狀態
     function modify_order($order_id,$state){
         date_default_timezone_set('Asia/Taipei');
         $this->db->where('order_id',$order_id);

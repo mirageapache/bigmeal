@@ -9,7 +9,7 @@ class ProductModel extends CI_Model {
     function get_product(){
     	$this->db->select('products.product_id, products.name, products.price, product_img.img_name, product_img.path');
     	$this->db->from('products');
-    	$this->db->join('product_img', 'products.product_id = product_img.product_id');
+    	$this->db->join('product_img', 'products.product_id = product_img.product_id','left');
     	$query = $this->db->get();
         return $query->result_array();
     }
@@ -18,7 +18,7 @@ class ProductModel extends CI_Model {
     function get_product_detail($id){
     	$this->db->select('*');
     	$this->db->from('products');
-    	$this->db->join('product_img', 'products.product_id = product_img.product_id');
+    	$this->db->join('product_img', 'products.product_id = product_img.product_id','left');
     	$this->db->where(array('products.product_id'=>$id));
     	$query = $this->db->get();
         if($query->num_rows() > 0){

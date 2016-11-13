@@ -155,19 +155,15 @@ function delete_products(){
 		$.ajax({
 			url:'/index.php/backpanel/delete_product',
 			type:'POST',
-			data:{'data_array':id_array},	
+			data:{'data_array':id_array},
 			success:function(result){
-				console.log(result);
 				if(result == 'success'){
 					page_control(1,'1');
 				}
-
 			}
 		});
     }
-    else{
-    	edit_more('close');
-    }
+    edit_more('close');
 }
 
 </script>

@@ -109,6 +109,7 @@ function insert_product(){
 			if ($('input[type=file]').val().length > 0) {
 				$('.upload_img').trigger('click');
 			}
+			get_back_page('product_mg');
 		}
 	});
 }

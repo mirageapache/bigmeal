@@ -10,7 +10,7 @@ class BackPanel extends CI_Controller {
 			return true;
 		}
 		if($_SESSION['user']->user_type == 2){
-			$data['js'] = array('/js/page_control.js');
+			$data['js'] = array('/js/page_control.js','/package/js/jquery.flot.min.js');
 			$data['index'] = $index;
 			$this->load->view('/back/back_main_page',$data);
 		}
@@ -27,7 +27,14 @@ class BackPanel extends CI_Controller {
 			//暫存id，user、porduct、order被選中時存入
 			$_SESSION['back_id'] = $_POST['id'];
 		}
-		$this->load->view('/back/'.$index);
+
+		if($index == 'product_mg_insert' || $index == 'product_mg_detail'){
+			$data['js'] = array('/package/js/jquery.uploadfile.min.js');
+			$this->load->view('/back/'.$index,$data);
+		}
+		else{
+			$this->load->view('/back/'.$index);
+		}
 		return false;
 	}
 
