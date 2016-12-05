@@ -27,18 +27,18 @@
 			</select>
 		</span>
 		<span class="visible-xs">
-			<label style="margin:10px;"><input class="asc" name="order_by" value="asc" type="radio" checked/> 遞增</label>
-			<label style="margin:10px;"><input class="desc" name="order_by" value="desc" type="radio" /> 遞減</label>
+			<label style="margin:10px;"><input class="asc" name="order_by" value="asc" type="radio" /> 遞增</label>
+			<label style="margin:10px;"><input class="desc" name="order_by" value="desc" type="radio" checked/> 遞減</label>
 		</span>
 	</div>
 
 	<table class="list_table hidden-xs">
 		<tr style="border-top:1px solid gray;border-bottom:1px solid gray;">
-			<th class="i_order_id th" ondblclick="sort_data('i_order_id')" title="依訂單編號排序" >訂單編號<i class="icon-up-dir" hidden></i></th>
-			<th class="i_name th" ondblclick="sort_data('i_name')" title="依收件人排序" >收件人<i class="icon-up-dir" hidden></i></th>
-			<th class="i_total th" ondblclick="sort_data('i_total')" title="依總額排序" >總額<i class="icon-up-dir" hidden></i></th>
-			<th class="i_state th" ondblclick="sort_data('i_state')" title="依狀態排序" >狀態<i class="icon-up-dir" hidden></i></th>
-			<th class="i_order_time th" ondblclick="sort_data('i_order_time')" title="依日期排序" >日期<i class="icon-up-dir"></i></th>
+			<th class="i_order_id th" onclick="sort_data('i_order_id')" title="依訂單編號排序" >訂單編號<i class="icon-up-dir" hidden></i></th>
+			<th class="i_name th" onclick="sort_data('i_name')" title="依收件人排序" >收件人<i class="icon-up-dir" hidden></i></th>
+			<th class="i_total th" onclick="sort_data('i_total')" title="依總額排序" >總額<i class="icon-up-dir" hidden></i></th>
+			<th class="i_state th" onclick="sort_data('i_state')" title="依狀態排序" >狀態<i class="icon-up-dir" hidden></i></th>
+			<th class="i_order_time th" onclick="sort_data('i_order_time')" title="依日期排序" >日期<i class="icon-down-dir"></i></th>
 		</tr>
 	</table>
 

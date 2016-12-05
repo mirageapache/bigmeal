@@ -261,4 +261,53 @@ class BackModel extends CI_Model {
         return 'success';
     }
 
+    // 查詢銷售資料
+    function get_sale_turnover($type,$filter) {
+        //$type => 7天銷售、整月銷售、年度銷售(每月)
+        //$filter => 選擇的日期
+        date_default_timezone_set('Asia/Taipei');
+        // $current_day = date('Y-m-d');
+        $data['turnover'] = array();
+        $data['xaxis'] = array();
+
+        if ($type == 'week') {
+            //7天銷售
+            for ($i=6; $i >= 0; $i--) { 
+                $date = date('Y-m-d' , mktime(0,0,0,date("m"),date("d")-$i,date("Y")) );
+                $sql = "select T2.order_time, SUM(T2.total) as total from order_list T1 JOIN (select order_id,substr(order_time,1,10) as order_time,total from order_list) T2 where T1.order_id = T2.order_id and T2.order_time like '".$date."' group by T2.order_time";
+                $query = $this->db->query($sql);
+                if ($query->num_rows() > 0){$total = $query->row()->total;}
+                else{$total = 0;}
+                array_push($data['xaxis'], substr($date,5));
+                array_push($data['turnover'], (int)$total);
+            }
+        }
+        elseif ($type == 'month') {
+            //整月銷售
+            $month_day = cal_days_in_month(CAL_GREGORIAN,substr($filter,5),substr($filter,0,4));
+            for ($i=1; $i <= $month_day; $i++) { 
+                $sql = "select T2.order_time, SUM(T2.total) as total from order_list T1 JOIN (select order_id,substr(order_time,1,10) as order_time,total from order_list) T2 where T1.order_id = T2.order_id and T2.order_time like '".$filter."-".$i."' group by T2.order_time";
+                $query = $this->db->query($sql);
+                if ($query->num_rows() > 0){$total = $query->row()->total;}
+                else{$total = 0;}
+                array_push($data['xaxis'], $i);
+                array_push($data['turnover'], (int)$total);
+            }
+        }
+        elseif ($type == 'year') {
+            //年度銷售
+            for ($i=1; $i <= 12; $i++) { 
+                $sql = "select T2.order_time, SUM(T2.total) as total from order_list T1 JOIN (select order_id,substr(order_time,1,7) as order_time,total from order_list) T2 where T1.order_id = T2.order_id and T2.order_time like '".$filter."-".$i."' group by T2.order_time";
+                $query = $this->db->query($sql);
+                if ($query->num_rows() > 0){$total = $query->row()->total;}
+                else{$total = 0;}
+                array_push($data['xaxis'], $i.'月');
+                array_push($data['turnover'], (int)$total);
+            }
+        }
+        return $data;
+    }
+    
+
+
 }

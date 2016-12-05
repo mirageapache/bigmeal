@@ -49,10 +49,10 @@
 	<nav class="navbar hidden-xs" background="<?=base_url("/data/image/nav_bg.jpg")?>">
 	    <a class="navbar-brand" href="<?=site_url("/main/index")?>" title="首頁">青食市集</a>
 		<span class="menu">
-			<a href="<?=site_url("")?>">蔬菜</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">水果</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">肉類</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
-			<a href="<?=site_url("")?>">五穀雜糧</a>
+			<a href="<?=site_url("/main/main_page/vegetable")?>">蔬菜</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("/main/main_page/fruit")?>">水果</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("/main/main_page/meat")?>">肉類</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp 
+			<a href="<?=site_url("/main/main_page/cereal")?>">五穀雜糧</a>
 		</span>
 
 		<!-- 會員 -->
@@ -70,10 +70,10 @@
 				<div class="triangle"></div>
 				<h4><a href="<?=site_url("/user/user_page/1")?>"><i class=""></i>會員資料</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/2")?>"><i class=""></i>查詢訂單</a></h4>
-				<h4><a href="<?=site_url("/user/user_page/3")?>"><i class=""></i>購物記錄</a></h4>
-				<h4><a href="<?=site_url("/user/user_page/4")?>"><i class=""></i>收藏商品</a></h4>
+				<!-- <h4><a href="<?=site_url("/user/user_page/3")?>"><i class=""></i>購物記錄</a></h4>
+				<h4><a href="<?=site_url("/user/user_page/4")?>"><i class=""></i>收藏商品</a></h4> -->
 				<?php if ($_SESSION['user']->user_type == 2) { ?>
-				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>"><i class=""></i>網站管理</a></h4>
+				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>" target="blank"><i class=""></i>網站管理</a></h4>
 				<?php } ?>
 				<hr style="margin:5px 0" />
 			    <button class="logout_btn btn btn-success pull-right" onclick="logout()"><i class="icon-logout"></i>登出</button>
@@ -85,12 +85,14 @@
 		</span>
 
 		<!-- 搜尋 -->
-		<span class="search hidden-xs hidden-sm pull-right">
-			<form>
-				<input type="text" placeholder="search" />
-				<i class="search_submit icon-search" onclick="search()"></i>
-			</form>
-		</span>
+		<?php if (isset($index)) { ?>
+			<span class="search hidden-xs hidden-sm pull-right">
+				<form>
+					<input class="search_input" type="text" placeholder="搜尋產品" />
+					<i class="search_submit icon-search" onclick="search()"></i>
+				</form>
+			</span>
+		<?php } ?>
 
 	</nav>
 
@@ -109,26 +111,25 @@
 			<?php } ?>		
 			<?php if (isset($_SESSION['user'])) { ?>
 			<label class="user_name" onclick="open_user_xs()"><?php echo $_SESSION['user']->account ?>
-				<!-- <span class="caret"></span> -->
 				<i class="icon-down-dir"></i>
 			</label>
 			<div class="user_option_xs">
 				<div class="triangle"></div>
 				<h4><a href="<?=site_url("/user/user_page/1")?>">會員資料</a></h4>
 				<h4><a href="<?=site_url("/user/user_page/2")?>">查詢訂單</a></h4>
-				<h4><a href="<?=site_url("/user/user_page/3")?>">購物記錄</a></h4>
-				<h4><a href="<?=site_url("/user/user_page/4")?>">收藏商品</a></h4>
+<!-- 				<h4><a href="<?=site_url("/user/user_page/3")?>">購物記錄</a></h4>
+				<h4><a href="<?=site_url("/user/user_page/4")?>">收藏商品</a></h4> -->
 				<?php if ($_SESSION['user']->user_type == 2) { ?>
-				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>"></i>網站管理</a></h4>
+				<h4><a href="<?=site_url("/backpanel/back_main_page/0")?>" target="blank"></i>網站管理</a></h4>
 				<?php } ?>
 			</div>
 			<?php } ?>
 
 			<hr>
-			<h3><a href="<?=site_url("")?>">蔬菜</a></h3>
-			<h3><a href="<?=site_url("")?>">水果</a></h3>
-			<h3><a href="<?=site_url("")?>">肉品</a></h3>
-			<h3><a href="<?=site_url("")?>">五穀雜糧</a></h3>
+			<h3><a href="<?=site_url("/main/main_page/vegetable")?>">蔬菜</a></h3>
+			<h3><a href="<?=site_url("/main/main_page/fruit")?>">水果</a></h3>
+			<h3><a href="<?=site_url("/main/main_page/meat")?>">肉類</a></h3>
+			<h3><a href="<?=site_url("/main/main_page/cereal")?>">五穀雜糧</a></h3>
 			<hr>
 			<?php if (isset($_SESSION['user'])) { ?>
 				<button class="xs_logout btn btn-success pull-right" onclick="logout()"><i class="icon-logout"></i>登出</button>
@@ -151,9 +152,6 @@
 		</label>
 	</div>
 
-	<!-- <button class="btn" onclick="call_alert('123456789')">test</button> -->
-	
-
 <script type="text/javascript">
 	function login(){
 		location.href = "<?=site_url('/user/login_page/_')?>";
@@ -161,5 +159,18 @@
 
 	function logout(){
 		location.href = "<?=site_url('/user/logout')?>";
+		$.cookie('basket', null, { path: '/', expires: -1 });
 	}
+
+	// 關閉網站(沒實際作用)
+	window.onunload = function(event) {
+	  	$.ajax({
+			url: "/index.php/main/close_site",
+			type: "GET",
+			data: {} ,
+			success: function(result){
+				$.cookie('basket', null, { path: '/', expires: -1 });
+			}
+		});
+	};
 </script>

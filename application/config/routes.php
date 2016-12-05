@@ -38,8 +38,9 @@
 |
 */
 
-$route['default_controller'] = "main";
+$route['default_controller'] = "main/index";
 $route['404_override'] = '';
+$route['main/index'] = "/main/index/0";
 $route['backpanel/back_main_page'] = "/backpanel/back_main_page/0";
 $route['user/login_page'] = "/user/login_page/0";
 $route['user/user_page'] = "/user/user_page/0";

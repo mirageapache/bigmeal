@@ -9,7 +9,7 @@
 		<span class="tag" onclick="partial_view_ajax('2')">
 			<label class="order_list_label tag_label">查詢訂單</label>
 		</span>
-		<span class="tag" onclick="partial_view_ajax('3')">
+		<!-- <span class="tag" onclick="partial_view_ajax('3')">
 			<label class="purchased_label tag_label">購物記錄</label>
 		</span>
 		<span class="tag" onclick="partial_view_ajax('4')">
@@ -17,10 +17,7 @@
 		</span>
 		<span class="tag" onclick="partial_view_ajax('5')">
 			<label class="message_label tag_label">通知</label>
-		</span>
+		</span> -->
 	</div>
 	<div class="partial_view"></div>
 </div>
-
-
-<?php include(dirname(__FILE__)."/../partial/site_footer.php"); ?>

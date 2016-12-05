@@ -33,11 +33,12 @@
 	width: 80px;
 }
 .basket_panel>table>tbody>tr>td.price,
-.basket_panel>table>tbody>tr>td.amount{
-	width: 15%;
+.basket_panel>table>tbody>tr>td.amount,
+.basket_panel>table>tbody>tr>td.sub_total{
+	width: 100px;
 }
 .basket_panel>table>tbody>tr>td.cancel_item{
-	width: 100px;
+	width: 90px;
 	text-align: center;
 }
 .basket_panel>button.pay{

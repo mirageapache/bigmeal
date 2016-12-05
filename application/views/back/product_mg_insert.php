@@ -13,17 +13,17 @@
 		</div>
 		<div class="col-md-7">
 			<label class="label_title">名稱 <label class="hint name_hint pull-right"></label></label>
-			<input class="name form-control" />
+			<input class="name form-control" maxlength="50" />
 			<label class="label_title">售價 <label class="hint price_hint pull-right"></label></label>
-			<input class="price form-control" type="number" min="0" />
+			<input class="price form-control" type="number" min="0" maxlength="8" />
 			<label class="label_title">庫存 <label class="hint stock_hint pull-right"></label></label>
-			<input class="stock form-control" type="number" min="0"/>
+			<input class="stock form-control" type="number" min="0" maxlength="6" />
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
 			<label class="label_title">產地 <label class="hint place_hint pull-right"></label></label>
-			<input class="place form-control" />
+			<input class="place form-control" maxlength="10" />
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">類別</label>
@@ -47,7 +47,7 @@
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">單位 <label class="hint unit_hint pull-right"></label></label>
-			<input class="unit form-control" />
+			<input class="unit form-control" maxlength="5" />
 		</div>
 	</div>
 	<div>
@@ -106,9 +106,7 @@ function insert_product(){
 		data:{name:name,price:price,stock:stock,place:place,b_type:b_type,s_type:s_type,
 			  unit:unit,description:description,standard:standard},
 		success:function(result){
-			if ($('input[type=file]').val().length > 0) {
-				$('.upload_img').trigger('click');
-			}
+			$('.upload_img').trigger('click');
 			get_back_page('product_mg');
 		}
 	});

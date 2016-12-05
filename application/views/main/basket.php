@@ -6,10 +6,11 @@
 		<table class="basket_table hidden-xs">
 			<tr class="table_title">
 				<th></th>
-				<th style="">品名</th>
-				<th style="">價格</th>
-				<th style="">數量</th>
-				<th ></th>
+				<th>品名</th>
+				<th>單價</th>
+				<th>數量</th>
+				<th>小計</th>
+				<th style="text-align:center;"><button class="clean_basket btn btn-danger btn-sm" onclick="delete_basket()">清空籃子</button></th>
 			</tr>	
 			<tr class="hint_message"><td colspan="4"><h3 style="text-align: center;">購物籃沒東西！<a href="<?=site_url("/main/index")?>">去逛逛</a></h3></td></tr>
 
@@ -40,18 +41,19 @@
 	</div>
 </div>
 </body>
-</html>
 <script>
 	index = 0;
 	if($.cookie('basket') == null){
 		$('.hint_message').css("display","grid");
 		$('.product_item').css("display","none");
 		$('.product_item').css("border","1px solid red");
+		$('.clean_basket').hide();
 	}
 	else{
 		data_arr = JSON.parse($.cookie('basket'));
 		$('.hint_message').css("display","none");
 		$('.product_item').css("display","block");
+		$('.clean_basket').show();
 		total = 0;
 
 		$.each(data_arr, function(key,value){
@@ -60,6 +62,7 @@
 				'<td class="name">'+value.name+'</td>'+
 				'<td class="price">$NT '+value.price+'</td>'+
 				'<td class="amount">'+value.amount+'/'+value.unit+'</td>'+
+				'<td class="sub_total">'+value.sub_total +"元"+'</td>'+
 				'<td class="cancel_item"><button class="btn btn-danger btn-sm" onclick="cancel_item('+key+','+data_arr[index].id+','+data_arr[index].amount+')">取消購買</button></td>'+
 			'</tr>');
 			total = total + value.sub_total;
@@ -130,3 +133,4 @@
 	}
 
 </script>
+</html>

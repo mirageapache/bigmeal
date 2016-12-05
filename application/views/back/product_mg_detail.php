@@ -12,6 +12,7 @@
 			</form>
 		</div>
 		<div class="col-md-7">
+			<h4 class="label_title">編號： <label class="product_id"></label></h4>
 			<label class="label_title">名稱 <label class="hint name_hint pull-right"></label></label>
 			<input class="name form-control" />
 			<label class="label_title">售價 <label class="hint price_hint pull-right"></label></label>
@@ -87,6 +88,7 @@ function get_product_detail(){
 		success:function(result){
 			obj = JSON.parse(result);
 			$('.product_img').attr("src",obj[0].path+'/'+obj[0].img_name);
+			$('.product_id').text(obj[0].product_id);
 			$('.name').val(obj[0].name);
 			$('.price').val(obj[0].price);
 			$('.stock').val(obj[0].stock);

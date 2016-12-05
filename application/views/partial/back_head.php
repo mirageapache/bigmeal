@@ -9,8 +9,8 @@
 	<!-- css -->
 	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap.css.map")?>">
-	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.min.css")?>">
-	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.css.map")?>">
+	<!-- <link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.min.css")?>">
+	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.css.map")?>"> -->
 	<link rel="stylesheet" href="<?=base_url("/package/css/fontello/fontello.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/package/css/fontello/animation.css")?>">
  

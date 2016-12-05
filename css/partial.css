@@ -47,8 +47,8 @@ span.search>form>input{
 	border: 0.5px solid #ddd;
 	color:black;
 	padding: 3px 5px;
+	font-weight: normal;
 }
-
 .navbar .search >form>i{
 	position: relative;
 	right:30px;

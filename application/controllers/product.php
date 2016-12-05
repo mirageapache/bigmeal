@@ -3,9 +3,10 @@
 class Product extends CI_Controller {
 
 	public function get_product() //產品資訊清單
-	{
+	{	
+		$filter = $_POST['filter'];
 		$this->load->model('ProductModel');
-		$result = $this->ProductModel->get_product();
+		$result = $this->ProductModel->get_product($filter);
 		echo json_encode($result);
 	}
 
@@ -46,6 +47,13 @@ class Product extends CI_Controller {
 
 		$this->load->model('ProductModel');
 		$result = $this->ProductModel->stock_change($id,$amount,$act);
+		echo $result;
+	}
+
+	public function stock_change_array(){ //陣列資料修正產品庫存量
+		$data_array = $_POST['data_array'];
+		$this->load->model('ProductModel');
+		$result = $this->ProductModel->stock_change_array($data_array);
 		echo $result;
 	}
 

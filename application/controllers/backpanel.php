@@ -10,7 +10,7 @@ class BackPanel extends CI_Controller {
 			return true;
 		}
 		if($_SESSION['user']->user_type == 2){
-			$data['js'] = array('/js/page_control.js','/package/js/jquery.flot.min.js');
+			$data['js'] = array('/js/page_control.js');
 			$data['index'] = $index;
 			$this->load->view('/back/back_main_page',$data);
 		}
@@ -145,9 +145,15 @@ class BackPanel extends CI_Controller {
 			}
 		}
 		session_start();
-	
+		
 		$this->load->model('BackModel');
-		$result = $this->BackModel->insert_product_img($img_id,$_SESSION['product_id'],$img_id.'.'.substr($_FILES["file"]["type"],6,4));
+		if (empty($_FILES["file"]["name"])) { //沒選擇圖片
+			$result = $this->BackModel->insert_product_img($img_id,$_SESSION['product_id'],'default.png');
+		}
+		else{
+			$result = $this->BackModel->insert_product_img($img_id,$_SESSION['product_id'],$img_id.'.'.substr($_FILES["file"]["type"],6,4));
+		}
+
 		unset($_SESSION['product_id']);
 		redirect(site_url("/backpanel/back_main_page/2"));
 	}
@@ -186,13 +192,18 @@ class BackPanel extends CI_Controller {
 		$old_img_id = $_SESSION['img_id'];
 		$old_img_name = $_SESSION['img_name'];
 		$img_name = $_FILES["file"]["name"];
+		if(strlen($img_name) > 20){ // 圖片檔名超過20
+			$img_name = substr($_FILES["file"]["name"],0,15).'.'.substr($_FILES["file"]["type"],6,4);
+		}
 		$this->load->model('BackModel');
 		$this->BackModel->modify_product_img($old_img_id,$img_name);
 		if ($_FILES["file"]["error"] > 0){
 			echo "Error: ".$_FILES["file"]["error"];
 		}
 		else{
-			if(file_exists(dirname(__file__)."/../../data/products/".$old_img_name)){
+
+
+			if(file_exists(dirname(__file__)."/../../data/products/".$old_img_name) && $old_img_name != 'default.png'){
 				unlink(dirname(__file__)."/../../data/products/".$old_img_name);//刪除舊圖片
 			}
 			move_uploaded_file($_FILES["file"]["tmp_name"],dirname(__file__)."/../../data/products/".$img_name);
@@ -244,6 +255,18 @@ class BackPanel extends CI_Controller {
 		$result = $this->BackModel->modify_order($order_id,$state);
 		echo $result;
 	}
+
+	// 查詢銷售資訊
+	public function get_sale_turnover(){
+		$type = $_POST['type'];
+		$filter = $_POST['filter'];
+
+		$this->load->model('BackModel');
+		$result = $this->BackModel->get_sale_turnover($type,$filter);
+		echo json_encode($result);
+	}
+
+
 
 }
 

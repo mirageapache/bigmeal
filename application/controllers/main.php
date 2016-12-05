@@ -2,7 +2,6 @@
 
 class Main extends CI_Controller {
 
-	
 	public function index(){  //首頁
 		//user_log
 		if(empty($_COOKIE['log_time'])){
@@ -10,7 +9,19 @@ class Main extends CI_Controller {
 			$result = $this->UserModel->user_log('');
 			setcookie('log_time','time',time()+30);
 		}
+		$data['css'] = array('/css/product.css');
+		$this->load->view('index',$data);
+	}
 
+	public function main_page($index){  //首頁
+		//user_log
+		if(empty($_COOKIE['log_time'])){
+			$this->load->model('UserModel');
+			$result = $this->UserModel->user_log('');
+			setcookie('log_time','time',time()+30);
+		}
+
+		$data['index'] = $index;
 		$data['css'] = array('/css/product.css');
 		$this->load->view('index',$data);
 	}
@@ -56,6 +67,13 @@ class Main extends CI_Controller {
 		}
 	}
 
+	public function rule(){  //首頁
+		$this->load->view('/user/rule');
+	}
+
+	public function close_site(){ //關閉網站
+		session_destroy();
+	}
 
 }
 

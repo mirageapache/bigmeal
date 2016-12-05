@@ -9,8 +9,8 @@
 	<!-- css -->
 	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap.min.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap.css.map")?>">
-	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.min.css")?>">
-	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.css.map")?>">
+<!-- 	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.min.css")?>">
+	<link rel="stylesheet" href="<?=base_url("/package/css/bootstrap/bootstrap-theme.css.map")?>"> -->
 	<link rel="stylesheet" href="<?=base_url("/package/css/fontello/fontello.css")?>">
 	<link rel="stylesheet" href="<?=base_url("/package/css/fontello/animation.css")?>">
  
@@ -47,7 +47,10 @@
 			<li id="product_mg" onclick="get_back_page('product_mg')">產品管理</li>
 			<li id="order_mg" onclick="get_back_page('order_mg')">訂單管理</li>
 			<li id="sale_info" onclick="get_back_page('sale_info')">銷售資訊</li>
-			<li id="report" onclick="get_back_page('report')">報表</li>
+			<!-- <li id="report" onclick="get_back_page('report')">報表</li> -->
+			<hr/>
+			<a href="/" target="blank" style="color: #aaa; text-decoration: none;">網站首頁</a>
+			
 		</ul>
 	</div>
 </div>
@@ -97,6 +100,7 @@ $(document).ready(function(){
 		back_menu_switch('close');
 		$('#back_panel').css("width","100%");
 	};
+
 });
 
 function get_back_page(index,id){  //換頁

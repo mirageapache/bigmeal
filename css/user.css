@@ -61,9 +61,14 @@ label.title{
 	font-size: 20px;
 }
 
-
 div.register_panel>input{
 	margin:10px 0;
+}
+
+div.register_panel>.rule_label,
+div.register_panel>a{
+	font-size: 16px;
+	margin: 10px;
 }
 
 /*註冊成功頁*/

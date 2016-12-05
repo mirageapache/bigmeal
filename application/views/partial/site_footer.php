@@ -60,7 +60,7 @@
 
 	</div>
 	
-	<div class="follow_us">
+	<!-- <div class="follow_us">
 		<hr/>	
 		<h4><b>Subscribe</b></h4>
 		<div>
@@ -69,7 +69,7 @@
 			<span class="brand_icon t"><i class="icon-twitter-bird"></i></span>
 		</div>
 
-	</div>
+	</div> -->
 </div>
 </body>
 </html>

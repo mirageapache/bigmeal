@@ -23,11 +23,21 @@
 				</td>
 			</tr>
 		</table>
+		<label class="rule_label"><input class="rule_read" type="checkbox" onclick="read_rule();"> 我已閱讀</input></label>
+		<a href="<?=site_url("/main/rule")?>" target="blank">《網站使用條款》</a>
 		<hr>
 		<br/>
-		<button class="register_btn btn btn-primary" >註冊</button>
+		<button class="register_btn btn btn-primary" disabled="disabled">註冊</button>
 		
 	</div>
 </div>
-
-<?php include(dirname(__file__)."/../partial/site_footer.php");?>
+<script type="text/javascript">
+	function read_rule(){
+		if ($('.rule_read').prop('checked')) {
+			$('.register_btn').attr('disabled',false);
+		}
+		else{
+			$('.register_btn').attr('disabled',true);
+		}
+	};
+</script>

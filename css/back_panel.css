@@ -42,14 +42,16 @@ span.menu_tag{
 	padding: 0px;
 }
 
-#back_panel_menu>div>ul.menu_item>li{
+#back_panel_menu>div>ul.menu_item>li,
+#back_panel_menu>div>ul.menu_item>a{
+	display: block;
 	font-size: 20px;
 	margin: 0;
-	/*border: 1px solid red;*/
 	padding: 10px 20px;
 	cursor: pointer;
 }
-#back_panel_menu>div>ul.menu_item>li:hover{
+#back_panel_menu>div>ul.menu_item>li:hover,
+#back_panel_menu>div>ul.menu_item>a:hover{
 	background-color: #4e4a4a;
 }
 #back_panel_menu>div>ul.menu_item>li.action{
@@ -318,12 +320,12 @@ table.content_table>tbody>tr>td{
 }
 
 #product_mg_insert .label_title,
-#product_mg_detailproduct_mg_detail .label_title{
+#product_mg_detail .label_title{
 	font-size: 18px;
 	margin: 10px 0 0;
 }
 #product_mg_insert .hint,
-#product_mg_detailproduct_mg_detail .hint{
+#product_mg_detail .hint{
 	color: #a70000;
 	margin: 0 10px;
 }
@@ -404,4 +406,27 @@ table.content_table>tbody>tr>td{
 	#order_mg_detail>div.order_content>table>tbody>tr>td.item_no{
 		height: 50px;
 	}
-}	
+}
+
+/*----------  銷售資訊  -----------*/
+#sale_info>div.filter{
+	margin-left: 20px;
+}
+#sale_info>div.filter>div{
+	float: left;
+	margin-right: 20px;
+}
+#sale_info .month_select{
+	width: 100px;
+}
+
+#sale_info #chart_panel{
+	margin: 0 -10px;
+	overflow: auto;
+}
+#sale_info #data_chart{
+	width: 100%;
+	min-width: 700px;
+	height: 400px;
+	margin: 0 auto;
+}
