@@ -21,7 +21,7 @@
 					<option>4</option>
 					<option>5</option>
 				</select>
-				<label class="unit_title">/台斤</label>
+				<label class="unit_title">/<?php echo $data->unit; ?></label>
 			</span>
 			<br>
 			<?php if( $data->stock == 0){ ?>

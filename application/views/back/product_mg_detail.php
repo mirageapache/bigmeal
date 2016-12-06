@@ -4,7 +4,7 @@
 		<div class="col-md-5" style="text-align:center;">
 			<form class="img_form" action="/index.php/backpanel/modify_product_img" method="POST" enctype="multipart/form-data">
 				<div class="img_div">
-					<img class="product_img" src"">
+					<img class="product_img">
 					<div class="upload_hint" hidden>上傳圖片</div>
 				</div>
 				<input class="img_input" type="file" name="file" style="display:none;" />
@@ -14,17 +14,17 @@
 		<div class="col-md-7">
 			<h4 class="label_title">編號： <label class="product_id"></label></h4>
 			<label class="label_title">名稱 <label class="hint name_hint pull-right"></label></label>
-			<input class="name form-control" />
+			<input class="name form-control" maxlength="50" />
 			<label class="label_title">售價 <label class="hint price_hint pull-right"></label></label>
-			<input class="price form-control" type="number" min="0" />
+			<input class="price form-control" type="number" min="0" maxlength="8" />
 			<label class="label_title">庫存 <label class="hint stock_hint pull-right"></label></label>
-			<input class="stock form-control" type="number" min="0"/>
+			<input class="stock form-control" type="number" min="0" maxlength="6" />
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
 			<label class="label_title">產地 <label class="hint place_hint pull-right"></label></label>
-			<input class="place form-control" />
+			<input class="place form-control" maxlength="15" />
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">類別</label>
@@ -48,14 +48,14 @@
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">單位 <label class="hint unit_hint pull-right"></label></label>
-			<input class="unit form-control" />
+			<input class="unit form-control" maxlength="10" />
 		</div>
 	</div>
 	<div>
 		<label class="label_title">產品說明 <label class="hint description_hint pull-right"></label></label>
-		<textarea class="description form-control"></textarea>
+		<textarea class="description form-control" maxlength="300"></textarea>
 		<label class="label_title">產品規格 <label class="hint standard_hint pull-right"></label></label>
-		<textarea class="standard form-control"></textarea>
+		<textarea class="standard form-control" maxlength="200"></textarea>
 	</div>
 	<button class="btn btn-success pull-right" onclick="modify_product()">儲存</button>
 </div>
@@ -87,7 +87,7 @@ function get_product_detail(){
 		data:{},	
 		success:function(result){
 			obj = JSON.parse(result);
-			$('.product_img').attr("src",obj[0].path+'/'+obj[0].img_name);
+			$('.product_img').css("background-image","url('" + obj[0].path+'/'+obj[0].img_name+"')");
 			$('.product_id').text(obj[0].product_id);
 			$('.name').val(obj[0].name);
 			$('.price').val(obj[0].price);

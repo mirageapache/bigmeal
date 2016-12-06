@@ -285,7 +285,8 @@ class BackModel extends CI_Model {
         elseif ($type == 'month') {
             //整月銷售
             $month_day = cal_days_in_month(CAL_GREGORIAN,substr($filter,5),substr($filter,0,4));
-            for ($i=1; $i <= $month_day; $i++) { 
+            for ($i=1; $i <= $month_day; $i++) {
+                if ($i < 10) { $i = '0'.$i;}
                 $sql = "select T2.order_time, SUM(T2.total) as total from order_list T1 JOIN (select order_id,substr(order_time,1,10) as order_time,total from order_list) T2 where T1.order_id = T2.order_id and T2.order_time like '".$filter."-".$i."' group by T2.order_time";
                 $query = $this->db->query($sql);
                 if ($query->num_rows() > 0){$total = $query->row()->total;}
@@ -304,6 +305,19 @@ class BackModel extends CI_Model {
                 array_push($data['xaxis'], $i.'月');
                 array_push($data['turnover'], (int)$total);
             }
+        }
+        elseif ($type == 'popular') {
+            // 查詢總數量
+            $sql_total = "select SUM(`amount`) as total FROM `order_content` JOIN order_list WHERE order_content.order_id = order_list.order_id and order_list.order_time LIKE '%".$filter."%'";
+            $query = $this->db->query($sql_total);
+            if ($query->num_rows() > 0){$total = $query->row()->total;}
+                else{$total = 0;}
+            $sql_amount = "select T1.name as name, T2.amount as amount from products as T1 Join (SELECT order_content.product_id as product_id, SUM( order_content.amount ) as amount FROM order_list JOIN order_content WHERE order_list.order_id = order_content.order_id and order_list.order_time LIKE '%".$filter."%' group by order_content.product_id order by amount desc limit 0,10) as T2 where T1.product_id = T2.product_id";
+            $query = $this->db->query($sql_amount);
+            $data_array = $query->result_array();
+
+            $data['pie_total'] = $total;
+            $data['pie_array'] = $data_array;
         }
         return $data;
     }

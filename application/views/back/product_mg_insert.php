@@ -4,7 +4,7 @@
 		<div class="col-md-5" style="text-align:center;">
 			<form class="img_form" action="/index.php/backpanel/insert_product_img" method="POST" enctype="multipart/form-data">
 				<div class="img_div">
-					<img class="product_img" src"">
+					<img class="product_img">
 					<div class="upload_hint" hidden>上傳圖片</div>
 				</div>
 				<input class="img_input" type="file" name="file" style="display:none;" />
@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col-md-4">
 			<label class="label_title">產地 <label class="hint place_hint pull-right"></label></label>
-			<input class="place form-control" maxlength="10" />
+			<input class="place form-control" maxlength="15" />
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">類別</label>
@@ -47,14 +47,14 @@
 		</div>
 		<div class="col-md-4">
 			<label class="label_title">單位 <label class="hint unit_hint pull-right"></label></label>
-			<input class="unit form-control" maxlength="5" />
+			<input class="unit form-control" maxlength="10" />
 		</div>
 	</div>
 	<div>
 		<label class="label_title">產品說明 <label class="hint description_hint pull-right"></label></label>
-		<textarea class="description form-control"></textarea>
+		<textarea class="description form-control" maxlength="300"></textarea>
 		<label class="label_title">產品規格 <label class="hint standard_hint pull-right"></label></label>
-		<textarea class="standard form-control"></textarea>
+		<textarea class="standard form-control" maxlength="200"></textarea>
 	</div>
 	<button class="btn btn-success pull-right" onclick="insert_product()">新增</button>
 </div>
@@ -118,7 +118,7 @@ function img_preview(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('.product_img').attr('src', e.target.result);
+            $('.product_img').css('background-image', 'url("'+e.target.result+'")');
         }
         reader.readAsDataURL(input.files[0]);
     }

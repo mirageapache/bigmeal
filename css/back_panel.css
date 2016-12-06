@@ -293,7 +293,6 @@ table.content_table>tbody>tr>td{
 }
 #product_mg_insert .img_div,
 #product_mg_detail .img_div{
-	/*background-image: url('/data/image/upload.png');*/
 	background-repeat: no-repeat;
 	background-position: center;
 	display:inline-block;
@@ -306,6 +305,9 @@ table.content_table>tbody>tr>td{
 	border: 1px solid gray;
 	width: 250px;
 	height: 250px;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 #product_mg_insert .upload_hint,
 #product_mg_detail .upload_hint{

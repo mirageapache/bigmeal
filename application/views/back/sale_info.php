@@ -6,6 +6,9 @@
 			<button type="button" class="month btn btn-primary" onclick="get_sale_info('month')">整月</button>
 			<button type="button" class="year btn btn-primary" onclick="get_sale_info('year')">年度</button>
 		</div>
+		<div class="btn-group" role="group">
+			<button type="button" class="week btn btn-primary" onclick="get_sale_info('popular')">熱門商品</button>
+		</div>
 		<select class="month_select form-control" hidden></select>
 	</div>
 	<div id="chart_panel">
@@ -17,6 +20,7 @@
 <script type="text/javascript">
 var data_array = [];
 var xaxis_array = [];
+var pie_data = [];
 var chart_title;
 
 $(document).ready(function () {
@@ -61,6 +65,11 @@ function get_sale_info(type,filter){
 		$('.month_select').hide();
 		filter = y;
 	}
+	else if (type == 'popular') {
+		chart_title = y+'-'+m+' 熱門商品百分比';
+		$('.month_select').hide();
+		filter = y+'-'+m;
+	}
 
 	$.ajax({
 		url:'/index.php/backpanel/get_sale_turnover',
@@ -68,10 +77,26 @@ function get_sale_info(type,filter){
 		data:{type:type,filter:filter},
 		success:function(result){
 			obj = JSON.parse(result);
-			data_array = obj["turnover"];
-			xaxis_array = obj["xaxis"];
+			if (type == 'popular') {
+				total = obj["pie_total"];
+				pie_data = [];
+	            // 將 y 計算成百分比
+				$.each(obj["pie_array"],function(i,value){
+					pie_data.push({name : value.name, y : (value.amount / total * 100)});
+				});
+				pie_chart();
+			}
+			else{
+				data_array = obj["turnover"];
+				xaxis_array = obj["xaxis"];
+				line_chart();
+			}
+		}
+	});
+}
 
-			Highcharts.chart('data_chart', {
+function line_chart(){
+	Highcharts.chart('data_chart', {
 		        title: {
 		            text: chart_title,
 		            x: -20 //center
@@ -102,10 +127,41 @@ function get_sale_info(type,filter){
 		            data: data_array
 		        }],
 		    });
+}
 
-
-		}
-	});
+function pie_chart(){
+	Highcharts.chart('data_chart', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: chart_title
+        },
+        tooltip: {
+            pointFormat: '<b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: false
+            }
+        },
+        series: [{
+            colorByPoint: true,
+            data: pie_data
+        }]
+    });
 }
 
 </script>
